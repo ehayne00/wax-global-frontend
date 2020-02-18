@@ -1,10 +1,15 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
     return(
-      <div>
+      <nav>
           <h1>Wax Global</h1>
-      </div>
+         <button><NavLink to='/stories' exact >Swell Stories</NavLink></button>
+         <button><NavLink to='/users/:id' exact >My Profile</NavLink></button>
+          <button><NavLink to='/favourites' exact >My Faves</NavLink></button>
+          
+      </nav>
     )
 }
 
