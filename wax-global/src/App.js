@@ -8,31 +8,71 @@ import LoginPage from './Components/LoginPage'
 import FavouritesList from './Components/FavouritesList'
 import StoryDetails from './Components/StoryDetails';
 import UserDetails from './Components/UserDetails';
+const favouritesUrl = 'http://localhost:3000/favourites'
 
 class App extends React.Component {
 
   state = {
     stories: [],
     mapShowing: false,
-    username: null,
-    userId: null
+    user: null,
+    myFavouritesList: [],
+    selectedStory: null,
+    selectedUser: null
   }
 
-  componentDidMount() {
-    fetch('http://localhost:3000/stories')
-    .then(resp => resp.json())
-    .then(stories => this.setState({ stories }))
+  updateSelectedUserToTargetUser = story => {
+    this.setState({
+      selectedUser: story.user
+    })
+  }
 
-    if(this.props.username === null) {
-      this.props.history.push('/')
-    } else if (localStorage.token) {
+  updateSelectedUserToCurrentUser = () =>{
+    console.log(this.state.user)
+    this.setState({
+      selectedUser: this.state.user
+    })
+  }
+
+  updateSelectedStory = story => {
+    this.setState({
+      selectedStory: story
+    })
+     
+  }
+
+  updateMyFavouritesList = () => {
+    API.fetchUserFavourites()
+    .then(data => this.setState({
+      myFavouritesList: data
+    }))
+  }
+
+  addToFavourites = (id) =>
+  API.post(favouritesUrl, {
+    favourite: {
+      user_id: this.state.userId,
+      story_id: id
+    }
+  })
+
+  componentDidMount() {
+
+    if(localStorage.token) {
+      
       API.validate()
       .then(data => {
         if (data.error) throw Error(data.error)
         this.login(data)
-        this.props.history.push('/')
+        // this.props.history.push('/stories')
       }).catch(error => alert(error))
     }
+
+    fetch('http://localhost:3000/stories')
+    .then(resp => resp.json())
+    .then(stories => this.setState({ stories }))
+
+    this.updateMyFavouritesList()
   }
 
   toggleMapShowing = () => {
@@ -41,37 +81,44 @@ class App extends React.Component {
 
   login = data => {
     this.setState({
-      username:data.user_sername,
-      userId: data.user_id
+      
+      userId: data.user.id,
+      user: data.user
     })
     localStorage.token = data.token
   }
 
   logout = () => {
-    this.setState({ username: null})
+    this.setState({ user: null})
     localStorage.removeItem('token')
   }
 
   render () {
-    const { stories, mapShowing, username } = this.state
-    const { toggleMapShowing, logout, login } = this
+    const { stories, mapShowing, myFavouritesList, selectedStory, selectedUser, user } = this.state
+    const { toggleMapShowing, logout, login, addToFavourites, updateSelectedStory,
+    updateSelectedUserToCurrentUser, updateSelectedUserToTargetUser } = this
 
   return (
     <div className="App">
       <div>
-      < NavBar logout={logout} username={username}/>
+      < NavBar logout={logout} user={user} 
+      updateSelectedUserToCurrentUser={updateSelectedUserToCurrentUser} user={user}/>
       </div>
       <Switch>
         <Route exact path='/' component={props => (
         <LoginPage {...props} login={login} />)} />
         <Route exact path='/stories' component={ props => (
-          <StoriesList {...props} stories={stories} mapShowing={mapShowing} toggleMapShowing={toggleMapShowing}/>
+          <StoriesList {...props} stories={stories} mapShowing={mapShowing} 
+          toggleMapShowing={toggleMapShowing} addToFavourites={addToFavourites}
+          updateSelectedStory={updateSelectedStory} updateSelectedUserToTargetUser={updateSelectedUserToTargetUser}/>
         )} />
         <Route exact path='/favourites' component={ props => (
-          <FavouritesList {...props} /> 
+          <FavouritesList {...props} myFavouritesList={myFavouritesList}/> 
         )} />
-        <Route exact path='/stories/:id' component={StoryDetails} />
-        <Route exact path='/users/:id' component={UserDetails} />
+        <Route exact path='/stories/:id' component={ props => (
+        <StoryDetails {...props} selectedStory={selectedStory}/>)} />
+        <Route exact path='/users/:id' component={props => (
+          <UserDetails {...props} selectedUser={selectedUser}/>)}/>
 
       </Switch>
       

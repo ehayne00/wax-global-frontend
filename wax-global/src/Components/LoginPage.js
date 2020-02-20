@@ -20,7 +20,8 @@ class LoginPage extends React.Component {
         profileImage: ''
     }
 
-    handleLogin = () => {
+    handleLogin = (event) => {
+      event.preventDefault()
         API.login(this.state.usernameLogin, this.state.passwordLogin)
           .then(data => {
             
@@ -31,8 +32,9 @@ class LoginPage extends React.Component {
           .catch(error => alert(error))
     }
       
-    handleSignup = () => {
-        API.createAccount(this.state.usernameSignup, this.state.passwordSignup)
+    handleSignup = (event) => {
+        event.preventDefault()
+        API.createAccount(this.state.usernameSignup, this.state.passwordSignup, this.state.email, this.state.profileImage, this.state.bio )
         .then(data => {
           
           if (data.error) throw Error(data.error)
@@ -60,6 +62,8 @@ class LoginPage extends React.Component {
                 {this.state.loginForm ?
                  <div>
                      <h3>Enter your login details:</h3>
+
+             <form onSubmit={handleLogin}>
                <TextField
                  label='Username'
                  value={usernameLogin}
@@ -79,9 +83,11 @@ class LoginPage extends React.Component {
        
                <br />
                <br />
-               <Button onSubmit={handleLogin} variant='contained' color='primary'>
+               <Button type="submit" variant='contained' color='primary'>
                  submit
                </Button>
+            </form>
+
                <h3>Or need to...</h3>
                <Button onClick={toggleLoginForm} variant='contained' color='primary'>
                  Sign Up
@@ -90,6 +96,8 @@ class LoginPage extends React.Component {
                 :
                 <div>
                 <h3>Enter details to sign-up:</h3>
+
+        <form onSubmit={handleSignup}>       
           <TextField
             label='Username'
             value={usernameSignup}
@@ -136,9 +144,11 @@ class LoginPage extends React.Component {
 
           <br />
           <br />
-          <Button onChange={handleSignup} variant='contained' color='primary'>
+          <Button type="submit" variant='contained' color='primary'>
             Submit
           </Button>
+        </form>   
+
           <h3>Or need to...</h3>
           <Button onClick={toggleLoginForm} variant='contained' color='primary'>
             Log In

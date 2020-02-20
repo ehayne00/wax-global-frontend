@@ -1,9 +1,9 @@
 import React from 'react'
 
-const UserDetails = () => {
+const UserDetails = ({selectedUser}) => {
     return (
         <div>
-
+            <h1>{selectedUser.username}</h1>
         </div>
     )
 }
