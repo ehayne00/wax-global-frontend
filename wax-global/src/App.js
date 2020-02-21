@@ -15,49 +15,22 @@ class App extends React.Component {
   state = {
     stories: [],
     mapShowing: false,
-    user: null,
-    myFavouritesList: [],
-    selectedStory: null,
-    selectedUser: null
-  }
-
-  updateSelectedUserToTargetUser = story => {
-    this.setState({
-      selectedUser: story.user
-    })
-  }
-
-  updateSelectedUserToCurrentUser = () =>{
-    console.log(this.state.user)
-    this.setState({
-      selectedUser: this.state.user
-    })
-  }
-
-  updateSelectedStory = story => {
-    this.setState({
-      selectedStory: story
-    })
-     
-  }
-
-  updateMyFavouritesList = () => {
-    API.fetchUserFavourites()
-    .then(data => this.setState({
-      myFavouritesList: data
-    }))
+    user: null
   }
 
   addToFavourites = (id) =>
   API.post(favouritesUrl, {
     favourite: {
-      user_id: this.state.userId,
+      user_id: this.state.user.id,
       story_id: id
     }
   })
 
   componentDidMount() {
-
+    // if (this.state.user === null){
+    //   this.props.history.push('/')
+    // }
+    // else 
     if(localStorage.token) {
       
       API.validate()
@@ -71,8 +44,7 @@ class App extends React.Component {
     fetch('http://localhost:3000/stories')
     .then(resp => resp.json())
     .then(stories => this.setState({ stories }))
-
-    this.updateMyFavouritesList()
+    
   }
 
   toggleMapShowing = () => {
@@ -94,31 +66,29 @@ class App extends React.Component {
   }
 
   render () {
-    const { stories, mapShowing, myFavouritesList, selectedStory, selectedUser, user } = this.state
-    const { toggleMapShowing, logout, login, addToFavourites, updateSelectedStory,
-    updateSelectedUserToCurrentUser, updateSelectedUserToTargetUser } = this
+    const { stories, mapShowing, user } = this.state
+    const { toggleMapShowing, logout, login, addToFavourites } = this
 
   return (
     <div className="App">
       <div>
-      < NavBar logout={logout} user={user} 
-      updateSelectedUserToCurrentUser={updateSelectedUserToCurrentUser} user={user}/>
+      < NavBar logout={logout} user={user} />
       </div>
       <Switch>
         <Route exact path='/' component={props => (
         <LoginPage {...props} login={login} />)} />
         <Route exact path='/stories' component={ props => (
           <StoriesList {...props} stories={stories} mapShowing={mapShowing} 
-          toggleMapShowing={toggleMapShowing} addToFavourites={addToFavourites}
-          updateSelectedStory={updateSelectedStory} updateSelectedUserToTargetUser={updateSelectedUserToTargetUser}/>
+          toggleMapShowing={toggleMapShowing} />
         )} />
         <Route exact path='/favourites' component={ props => (
-          <FavouritesList {...props} myFavouritesList={myFavouritesList}/> 
+          <FavouritesList {...props} toggleMapShowing={toggleMapShowing} 
+          mapShowing={mapShowing}/> 
         )} />
         <Route exact path='/stories/:id' component={ props => (
-        <StoryDetails {...props} selectedStory={selectedStory}/>)} />
-        <Route exact path='/users/:id' component={props => (
-          <UserDetails {...props} selectedUser={selectedUser}/>)}/>
+        <StoryDetails {...props} addToFavourites={addToFavourites}/>)} />
+        <Route exact path='/users/:id' component={ props => (
+          <UserDetails {...props} user={user} toggleMapShowing={toggleMapShowing} mapShowing={mapShowing}/>)}/>
 
       </Switch>
       

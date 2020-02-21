@@ -1,24 +1,20 @@
 import React from 'react'
 
 
-const StoryDetails = ({selectedStory}) => {
+const StoryDetails = (props) => {
 
-
-
-    
-
-        // const story = props.location.storyProps
-        // console.log(story)
+   const details = props.location.state.story
 
     return (
         <div>
-            <img alt="oh no!"src={selectedStory.user.image}/>
-            <h3>{selectedStory.user.username}</h3>
-            <img alt="oh no!" src={selectedStory.image}/>
-            <h2>{selectedStory.title}</h2>
-            <h3>{selectedStory.region}, {selectedStory.country}</h3>
-            <p>{selectedStory.content}</p>
-            <button>Add To Favourites</button>
+            <h3>{details.user.username}</h3>
+            <img className="profile-image"alt="oh no!"src={details.user.image}/>
+            <h2><u>{details.title}</u></h2>
+            <img className="picture-uploaded"alt="oh no!" src={details.image}/>
+
+            <h3>{details.region}, {details.country}</h3>
+            <p>{details.content}</p>
+            <button onClick={() => props.addToFavourites(details.id)}>Add To Favourites</button>
         </div>
     )
     

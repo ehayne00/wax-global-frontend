@@ -13,6 +13,35 @@
 
 }
 
+.map-view {
+  max-width: 100%; /*not this*/
+  position: fixed;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  left: 100px;
+  top: 100px; 
+}
+
+.profile-image {
+  max-width: 100px;
+  position: fixed;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  left: 100px;
+  top: 100px; 
+}
+
+.picture-uploaded {
+  max-width: 100%;
+  height: auto;
+  padding:1px;
+  border:1px solid #021a40;
+}
+
 .text-color {
   color: grey;
 }
