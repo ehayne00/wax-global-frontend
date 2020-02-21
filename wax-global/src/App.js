@@ -15,14 +15,16 @@ class App extends React.Component {
   state = {
     stories: [],
     mapShowing: false,
-    user: null
+    user: null,
+    user_id: null
   }
 
   addToFavourites = (id) =>
   API.post(favouritesUrl, {
     favourite: {
       user_id: this.state.user.id,
-      story_id: id
+      story_id: id,
+
     }
   })
 
@@ -54,7 +56,7 @@ class App extends React.Component {
   login = data => {
     this.setState({
       
-      userId: data.user.id,
+      user_id: data.user.id,
       user: data.user
     })
     localStorage.token = data.token

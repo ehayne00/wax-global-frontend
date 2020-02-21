@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import ProfileCard from './ProfileCard'
 import MapView from './MapView'
+import StoryForm from './StoryForm'
 
 
 class UserDetails extends Component {
 
     state = {
-        userStories: []
+        userStories: [],
+        formShowing: false
     }
 
 
@@ -32,7 +34,11 @@ class UserDetails extends Component {
 
     componentWillUnmount(){
         this.mounted = false;
-      }
+    }
+
+    toggleFormShowing = () => {
+        this.setState({ formShowing: !this.state.formShowing})
+    }
 
     render() {
         const details = this.props.location.state.user
@@ -52,8 +58,11 @@ class UserDetails extends Component {
             <div>
               <button>Delete My Account</button>
               <button>Edit My Profile</button>
-              <button>Create Story</button>
+              <button onClick={() => this.toggleFormShowing()}>Create Story</button>
             </div>
+            )}
+            {this.state.formShowing && (
+                <div><StoryForm /></div>
             )}
             <div className="prof-box">
                {

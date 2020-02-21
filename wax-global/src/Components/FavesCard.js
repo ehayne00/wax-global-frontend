@@ -22,6 +22,7 @@ const FavesCard = ({story, toggleMapShowing}) => {
               <button>Read Story</button>
             </Link>
             <button onClick={() => toggleMapShowing()}>Show Me Where</button>
+            <button>Remove story</button>
         </div>
 
     )

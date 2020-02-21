@@ -49,6 +49,18 @@ class LoginPage extends React.Component {
     handleChange = event => {
           this.setState({ [event.target.name]: event.target.value })
     }
+
+    handleImageChange = e => {
+      let files = e.target.files;
+      let reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      reader.onload= e =>{
+        this.setState({
+          profileImage: e.target.result
+        })
+      }
+    }
     
     toggleLoginForm = () => {
         this.setState({ loginForm: !this.state.loginForm})
@@ -139,6 +151,8 @@ class LoginPage extends React.Component {
              id="outlined-button-file"
              multiple
              type="file"
+             name="file"
+             onChange={(e) => this.handleImageChange(e)}
             />
 
 

@@ -12,7 +12,7 @@ const StoryDetails = (props) => {
             <h2><u>{details.title}</u></h2>
             <img className="picture-uploaded"alt="oh no!" src={details.image}/>
 
-            <h3>{details.region}, {details.country}</h3>
+            <h3><span role="img">📌 </span>{details.region}, {details.country}</h3>
             <p>{details.content}</p>
             <button onClick={() => props.addToFavourites(details.id)}>Add To Favourites</button>
         </div>
