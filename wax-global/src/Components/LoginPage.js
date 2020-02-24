@@ -67,7 +67,7 @@ class LoginPage extends React.Component {
     }
 
     render () {
-        const { usernameLogin, passwordLogin, usernameSignup, passwordSignup, email, bio, profileImage } = this.state
+        const { usernameLogin, passwordLogin, usernameSignup, passwordSignup, email, bio } = this.state
         const { handleChange, handleLogin, toggleLoginForm, handleSignup } = this
         return (
             <div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import StoryDetails from './StoryDetails';
+// import StoryDetails from './StoryDetails';
 
 
 const StoryCard = ({story, toggleMapShowing}) => {
@@ -14,8 +14,13 @@ const StoryCard = ({story, toggleMapShowing}) => {
             <p className="thumbnail-name">{story.user.username}</p>
             </Link>
             </div>
+            { story.image ?
             <img className="image-size"alt='oh no!' src={story.image} />
-            <h3><span role="img">📌</span> {story.region}, {story.country}</h3>
+            : <video className="image-size" controls autoPlay loop>
+              <source src={story.video} type="video/mp4" />
+            </video>
+            }
+            <h3><span role="img">📌</span> {story.address}</h3>
             <Link to={{pathname:`/stories/${story.id}`,
             state: {story: story}}} >
               <button>Read Story</button>

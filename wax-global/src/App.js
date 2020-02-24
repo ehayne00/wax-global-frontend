@@ -8,6 +8,8 @@ import LoginPage from './Components/LoginPage'
 import FavouritesList from './Components/FavouritesList'
 import StoryDetails from './Components/StoryDetails';
 import UserDetails from './Components/UserDetails';
+// import { GoogleComponent } from 'react-google-location'
+
 const favouritesUrl = 'http://localhost:3000/favourites'
 
 class App extends React.Component {
