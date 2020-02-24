@@ -1,12 +1,39 @@
 import React from 'react'
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
-const MapView = () => {
+const MapView = ({google, onMapClicked, onMarkerClick, onInfoWindowClose, latitude, longitude, toggleMapShowing}) => {
+    const style = {
+        width: '100%',
+        height: '140%'
+      }
     return (
         <div>
-            <h2>This is the map view</h2>
+           <button className="map-x"onClick={() => toggleMapShowing(latitude, longitude)}><u>Exit Map View</u></button>
+            <div className="map-view">
+            <Map           
+            google={google}
+            style={style}
+            initialCenter={{
+             lat: latitude,
+             lng: longitude
+            }}
+            zoom={10}
+            onClick={onMapClicked}>
+ 
+            <Marker onClick={onMarkerClick}
+             name={'Current location'} />
+
+            <InfoWindow onClose={onInfoWindowClose}>
+
+            </InfoWindow>
+           </Map>
+           </div>
         </div>
     )
 }
 
-export default MapView;
+
+export default GoogleApiWrapper({
+    apiKey: ('AIzaSyAgUGzj-VxQPQ1P0uaVNt6r62c9B1rP6Go')
+  })(MapView)

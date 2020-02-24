@@ -30,7 +30,8 @@ class FavouritesList extends React.Component {
             <p>Use this space to store stories that inspire you/ places you aspire to surf!</p>
             <h3>Your Favourites:</h3>
             {this.props.mapShowing &&
-            <div><MapView /></div>}
+            <div><MapView latitude={this.props.latitude} longitude={this.props.longitude}
+            toggleMapShowing={this.props.toggleMapShowing}/></div>}
             {this.state.myFavouriteStories !== null || this.state.myFavouritesList !== undefined ?
         <div className="prof-box">
           {

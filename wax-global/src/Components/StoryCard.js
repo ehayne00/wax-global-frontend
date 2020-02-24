@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// import {GoogleApiWrapper} from 'google-maps-react';
 // import StoryDetails from './StoryDetails';
 
 
@@ -25,7 +26,7 @@ const StoryCard = ({story, toggleMapShowing}) => {
             state: {story: story}}} >
               <button>Read Story</button>
             </Link>
-            <button onClick={() => toggleMapShowing()}>Show Me Where</button>
+            <button onClick={() => toggleMapShowing(story.latitude, story.longitude)}>Show Me Where</button>
         </div>
 
     )

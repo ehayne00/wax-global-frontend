@@ -18,7 +18,9 @@ class App extends React.Component {
     stories: [],
     mapShowing: false,
     user: null,
-    user_id: null
+    user_id: null,
+    latitude: "",
+    longitude: ""
   }
 
   addToFavourites = (id) =>
@@ -51,8 +53,17 @@ class App extends React.Component {
     
   }
 
-  toggleMapShowing = () => {
-    this.setState({ mapShowing: !this.state.mapShowing})
+  toggleMapShowing = (latitude, longitude) => {
+    this.setState({ mapShowing: !this.state.mapShowing,
+       })
+       !this.state.mapShowing && (this.setLatLng(latitude, longitude))
+  }
+
+  setLatLng = (latitude, longitude) => {
+    this.setState({
+      latitude: latitude,
+      longitude: longitude
+    })
   }
 
   login = data => {
@@ -70,7 +81,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { stories, mapShowing, user } = this.state
+    const { stories, mapShowing, user, latitude, longitude } = this.state
     const { toggleMapShowing, logout, login, addToFavourites } = this
 
   return (
@@ -83,16 +94,17 @@ class App extends React.Component {
         <LoginPage {...props} login={login} />)} />
         <Route exact path='/stories' component={ props => (
           <StoriesList {...props} stories={stories} mapShowing={mapShowing} 
-          toggleMapShowing={toggleMapShowing} />
+          toggleMapShowing={toggleMapShowing} latitude={latitude} longitude={longitude}/>
         )} />
         <Route exact path='/favourites' component={ props => (
           <FavouritesList {...props} toggleMapShowing={toggleMapShowing} 
-          mapShowing={mapShowing}/> 
+          mapShowing={mapShowing} latitude={latitude} longitude={longitude}/> 
         )} />
         <Route exact path='/stories/:id' component={ props => (
         <StoryDetails {...props} addToFavourites={addToFavourites}/>)} />
         <Route exact path='/users/:id' component={ props => (
-          <UserDetails {...props} user={user} toggleMapShowing={toggleMapShowing} mapShowing={mapShowing}/>)}/>
+          <UserDetails {...props} user={user} toggleMapShowing={toggleMapShowing} mapShowing={mapShowing}
+          latitude={latitude} longitude={longitude}/>)}/>
 
       </Switch>
       

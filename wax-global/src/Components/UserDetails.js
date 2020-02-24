@@ -137,7 +137,8 @@ class UserDetails extends Component {
             </div>
             <p>{user.bio}</p>
             {this.props.mapShowing &&
-            <div><MapView /></div>}
+            <div><MapView latitude={this.props.latitude} 
+            longitude={this.props.longitude} toggleMapShowing={this.props.toggleMapShowing}/></div>}
             {this.props.user === user && (
 
             <div>
