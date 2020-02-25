@@ -23,7 +23,10 @@ const StoryDetails = (props) => {
             <h3><span role="img">📌 </span>{story.address}</h3>
             <p>{story.content}</p>
             <button onClick={() => props.addToFavourites(story.id)}>Add To Favourites</button>
-        </div>
+            {props.user.id === story.user.id && (
+                <button onClick={() => props.deleteStory(story.id)}>Delete Story</button>
+            )} 
+                    </div>
     )
 
     

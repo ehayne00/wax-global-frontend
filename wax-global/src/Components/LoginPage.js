@@ -51,6 +51,7 @@ class LoginPage extends React.Component {
     }
 
     handleImageChange = e => {
+      
       let files = e.target.files;
       let reader = new FileReader();
       reader.readAsDataURL(files[0]);
@@ -149,7 +150,7 @@ class LoginPage extends React.Component {
             <input
              accept="image/*"      
              id="outlined-button-file"
-             multiple
+             multiple={false}
              type="file"
              name="file"
              onChange={(e) => this.handleImageChange(e)}

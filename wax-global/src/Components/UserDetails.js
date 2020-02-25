@@ -5,6 +5,7 @@ import API from '../API'
 import PlacesAutocomplete, {
     geocodeByAddress, getLatLng
 } from 'react-places-autocomplete'
+import EditUserForm from './EditUserForm'
 const storyUrl = 'http://localhost:3000/stories'
 // const API_KEY = 'AIzaSyAgUGzj-VxQPQ1P0uaVNt6r62c9B1rP6Go'
 
@@ -13,14 +14,16 @@ class UserDetails extends Component {
 
     state = {
         userStories: [],
-        formShowing: false,
+        createFormShowing: false,
+        editFormShowing: false,
         image: "",
         title: "",
         content: "",
         latitude: "",
         longitude: "",
         address: "",
-        video: ""
+        video: "",
+        country: ""
     }
 
     setVideo = e => {
@@ -37,6 +40,7 @@ class UserDetails extends Component {
 
     handleImageChange = e => {
         let files = e.target.files;
+
         let reader = new FileReader();
         reader.readAsDataURL(files[0]);
   
@@ -45,6 +49,7 @@ class UserDetails extends Component {
             image: e.target.result
           })
         }
+
       }
 
     setCoordinates = e => {
@@ -56,8 +61,11 @@ class UserDetails extends Component {
     }
     
     setAddress = e => {
+        const place = e.split(", ")
+        const country = place[place.length-1]
         this.setState({
-            address: e
+            address: e,
+            country: country
         })
     }
 
@@ -85,14 +93,16 @@ class UserDetails extends Component {
             address: this.state.address,
             latitude: this.state.latitude,
             longitude: this.state.longitude,
-            video: this.state.video
+            video: this.state.video,
+            country: this.state.country
         }
 
         API.post(storyUrl, bodyObj)
-        .then(story => this.setState({
+        .then(story => (this.setState({
             userStories: [...this.state.userStories, story]
-        }))
-        this.toggleFormShowing()
+        }), this.props.updateStories(story)))
+        this.toggleCreateFormShowing()
+        
     }
 
 
@@ -120,14 +130,19 @@ class UserDetails extends Component {
         this.mounted = false;
     }
 
-    toggleFormShowing = () => {
-        this.setState({ formShowing: !this.state.formShowing})
+    toggleCreateFormShowing = () => {
+        this.setState({ createFormShowing: !this.state.createFormShowing})
+    }
+
+    toggleEditFormShowing = () => {
+        this.setState({ editFormShowing: !this.state.editFormShowing})
     }
 
     render() {
         const {user} = this.props.location.state
         // debugger
     return (
+        
         <div>
             <h1>{user.username}</h1>
             <div>{user.image ?
@@ -142,13 +157,13 @@ class UserDetails extends Component {
             {this.props.user === user && (
 
             <div>
-              <button>Delete My Account</button>
-              <button>Edit My Profile</button>
-              <button onClick={() => this.toggleFormShowing()}>Create Story</button>
+              <button onClick={() => this.props.deleteUser()}>Delete My Account</button>
+              <button onClick={() => this.toggleEditFormShowing()}>Edit My Profile</button>
+              <button onClick={() => this.toggleCreateFormShowing()}>Create Story</button>
             </div>
             )}
-            {this.state.formShowing && (
-                // <div><StoryForm updateFormData={this.updateFormData} handleSubmit={this.handleSubmit}/></div>
+
+            {this.state.createFormShowing && ( 
                 <div>
                 <h1>Create Story Form:</h1>
                 <p>(Upload one image <u>or</u> video per story, videos take a few minutes to upload. You will see your story once the video has finished uploading.)</p>
@@ -183,7 +198,7 @@ class UserDetails extends Component {
                      <input
                      accept="image/*"      
                      id="outlined-button-file"
-                     multiple="false"
+                     multiple={false}
                      type="file"
                      name="file"
                      onChange={(e) => this.handleImageChange(e)}
@@ -192,7 +207,7 @@ class UserDetails extends Component {
                      <input type="file"
                      id="upload_widget"
                      accept="video/mp4"
-                     multiple="false" 
+                     multiple={false} 
                      onChange={(e) => this.setVideo(e)}/><br />
 
                     <label>Title: </label>
@@ -208,9 +223,16 @@ class UserDetails extends Component {
                    this.state.userStories.map(story => <ProfileCard story={story} user={user} key={story.id} toggleMapShowing={this.props.toggleMapShowing}/>)
                }
             </div>
+        
+       
+
+        {this.state.editFormShowing && (
+            <EditUserForm user={this.props.user} toggleEditFormShowing={this.toggleEditFormShowing}/>
+        )} 
         </div>
-    )
+             )
         }
+        
 }
 
 export default UserDetails;

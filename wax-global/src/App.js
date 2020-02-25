@@ -3,7 +3,7 @@ import './App.css';
 import NavBar from './Components/NavBar'
 import API from './API'
 import StoriesList from './Components/StoriesList'
-import {Route, Switch} from 'react-router-dom'
+import {Route, withRouter, Switch} from 'react-router-dom'
 import LoginPage from './Components/LoginPage'
 import FavouritesList from './Components/FavouritesList'
 import StoryDetails from './Components/StoryDetails';
@@ -11,6 +11,9 @@ import UserDetails from './Components/UserDetails';
 // import { GoogleComponent } from 'react-google-location'
 
 const favouritesUrl = 'http://localhost:3000/favourites'
+// const widget = cloudinary.createUploadWidget({ 
+//   cloudName: "demo", uploadPreset: "preset1" }, (error, result) => { });
+// widget.open();
 
 class App extends React.Component {
 
@@ -20,7 +23,26 @@ class App extends React.Component {
     user: null,
     user_id: null,
     latitude: "",
-    longitude: ""
+    longitude: "",
+    searchTerm: ""
+  }
+
+  updateSearchTerm = event => {
+    this.setState({
+        searchTerm: event.target.value
+    })
+  }
+
+  filterStories = () => {
+    
+    return this.state.stories.filter(story =>  
+       story.country.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+  } 
+
+  updateStories = (story) => {
+    this.setState({
+      stories: [...this.state.stories, story]
+    })
   }
 
   addToFavourites = (id) =>
@@ -47,10 +69,13 @@ class App extends React.Component {
       }).catch(error => alert(error))
     }
 
+    this.fetchStories()
+  }
+
+  fetchStories = () => {
     fetch('http://localhost:3000/stories')
     .then(resp => resp.json())
     .then(stories => this.setState({ stories }))
-    
   }
 
   toggleMapShowing = (latitude, longitude) => {
@@ -64,6 +89,21 @@ class App extends React.Component {
       latitude: latitude,
       longitude: longitude
     })
+  }
+
+  deleteStory = (id) => {
+    this.props.history.push('/stories')
+    API.destroy('http://localhost:3000/stories', id)
+    .then(this.setState({
+      stories: [...this.state.stories].filter(story => story.id !== id)
+    }))
+  }
+
+  deleteUser = () => {
+    
+    API.destroy('http://localhost:3000/users', this.state.user.id)
+    .then(this.logout(),
+    this.props.history.push('/'))
   }
 
   login = data => {
@@ -82,8 +122,9 @@ class App extends React.Component {
 
   render () {
     const { stories, mapShowing, user, latitude, longitude } = this.state
-    const { toggleMapShowing, logout, login, addToFavourites } = this
-
+    const { toggleMapShowing, logout, login, addToFavourites, updateSearchTerm, 
+      updateStories, deleteStory, deleteUser } = this
+    const filteredStories = this.filterStories()
   return (
     <div className="App">
       <div>
@@ -92,19 +133,20 @@ class App extends React.Component {
       <Switch>
         <Route exact path='/' component={props => (
         <LoginPage {...props} login={login} />)} />
-        <Route exact path='/stories' component={ props => (
-          <StoriesList {...props} stories={stories} mapShowing={mapShowing} 
-          toggleMapShowing={toggleMapShowing} latitude={latitude} longitude={longitude}/>
+        <Route exact path='/stories' render={ props => (
+          <StoriesList {...props} stories={filteredStories} mapShowing={mapShowing} 
+          toggleMapShowing={toggleMapShowing} latitude={latitude} 
+          longitude={longitude} updateSearchTerm={updateSearchTerm}/>
         )} />
         <Route exact path='/favourites' component={ props => (
           <FavouritesList {...props} toggleMapShowing={toggleMapShowing} 
           mapShowing={mapShowing} latitude={latitude} longitude={longitude}/> 
         )} />
         <Route exact path='/stories/:id' component={ props => (
-        <StoryDetails {...props} addToFavourites={addToFavourites}/>)} />
+        <StoryDetails {...props} addToFavourites={addToFavourites} user={user} deleteStory={deleteStory}/>)} />
         <Route exact path='/users/:id' component={ props => (
           <UserDetails {...props} user={user} toggleMapShowing={toggleMapShowing} mapShowing={mapShowing}
-          latitude={latitude} longitude={longitude}/>)}/>
+          latitude={latitude} longitude={longitude} updateStories={updateStories} deleteUser={deleteUser}/>)}/>
 
       </Switch>
       
@@ -114,4 +156,4 @@ class App extends React.Component {
 }
 }
 
-export default App;
+export default withRouter(App);

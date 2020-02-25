@@ -34,6 +34,7 @@ const patch = (url, id, data) =>
          },
          body: JSON.stringify(data)
          }).then(resp => resp.json())
+         
 
 const destroy = (url, id) =>
     fetch(`${url}/${id}`, {
