@@ -9,7 +9,7 @@ const StoryCard = ({story, toggleMapShowing}) => {
         <div className="card"> 
           <div className="thumbnails">{story.user.image ?
             <img className="thumbnail-image" alt="oh no!" src={story.user.image} />
-          : <img className="thumbnail-image" alt="oh no!" src="https://i.ibb.co/9wsq5cz/Screenshot-2020-02-19-at-09-57-20.png" /> }
+          : <img className="thumbnail-image" alt="oh no!" src="https://i.ibb.co/z5Xj6hH/profile-pic.png" /> }
             <Link to={{pathname: `/users/${story.user_id}`,
             state: {user: story.user}}} >
             <p className="thumbnail-name">{story.user.username}</p>
@@ -22,6 +22,7 @@ const StoryCard = ({story, toggleMapShowing}) => {
             </video>
             }
             <h3><span role="img">📌</span> {story.address}</h3>
+          <p>"{story.title}.."</p>
             <Link to={{pathname:`/stories/${story.id}`,
             state: {story: story}}} >
               <button>Read Story</button>

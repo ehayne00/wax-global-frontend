@@ -102,7 +102,7 @@ class UserDetails extends Component {
             userStories: [...this.state.userStories, story]
         }), this.props.updateStories(story)))
         this.toggleCreateFormShowing()
-        
+        alert("creating story! - this may take a few mins")
     }
 
 
@@ -148,7 +148,7 @@ class UserDetails extends Component {
             <div>{user.image ?
             <img className="profile-image" alt="oh no!" src={user.image} />
             : <img className="profile-image" alt="oh no!" 
-             src="https://i.ibb.co/9wsq5cz/Screenshot-2020-02-19-at-09-57-20.png" /> }
+             src="https://i.ibb.co/z5Xj6hH/profile-pic.png" /> }
             </div>
             <p>{user.bio}</p>
             {this.props.mapShowing &&

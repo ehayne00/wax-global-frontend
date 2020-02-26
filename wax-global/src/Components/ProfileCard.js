@@ -11,7 +11,7 @@ const ProfileCard = ({story, user, toggleMapShowing}) => {
         <div className="card"> 
           <div className="thumbnails">{user.image ?
             <img className="thumbnail-image" alt="oh no!" src={user.image} />
-          : <img className="thumbnail-image" alt="oh no!" src="https://i.ibb.co/9wsq5cz/Screenshot-2020-02-19-at-09-57-20.png" /> }
+          : <img className="thumbnail-image" alt="oh no!" src="https://i.ibb.co/z5Xj6hH/profile-pic.png" /> }
             <Link to={{pathname: `/users/${story.user_id}`,
             state: {user: user}}} >
             <p className="thumbnail-name">{user.username}</p>

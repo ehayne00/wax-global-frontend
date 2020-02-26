@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 // import StoryDetails from './StoryDetails';
 
 
-const FavesCard = ({story, toggleMapShowing}) => {
+const FavesCard = ({story, toggleMapShowing, deleteFave}) => {
     const newStory = {...story[0], user: story[1]}
     return (
         <div className="card"> 
           <div className="thumbnails">{story[1].image ?
             <img className="thumbnail-image" alt="oh no!" src={story[1].image} />
-          : <img className="thumbnail-image" alt="oh no!" src="https://i.ibb.co/9wsq5cz/Screenshot-2020-02-19-at-09-57-20.png" /> }
+          : <img className="thumbnail-image" alt="oh no!" src="https://i.ibb.co/z5Xj6hH/profile-pic.png" /> }
             <Link to={{pathname: `/users/${story[1].id}`,
             state: {user: story[1]}}} >
             <p className="thumbnail-name">{story[1].username}</p>
@@ -28,7 +28,7 @@ const FavesCard = ({story, toggleMapShowing}) => {
               <button>Read Story</button>
             </Link>
             <button onClick={() => toggleMapShowing(story[0].latitude, story[0].longitude)}>Show Me Where</button>
-            <button>Remove story</button>
+            <button onClick={() => deleteFave(story[2].id, story[0].id)}>Remove story</button>
         </div>
 
     )

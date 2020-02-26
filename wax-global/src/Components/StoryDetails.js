@@ -1,9 +1,21 @@
 import React from 'react'
+import EditStoryForm from './EditStoryForm'
 
 
-const StoryDetails = (props) => {
+class StoryDetails extends React.Component {
 
-   const {story} = props.location.state
+    state = {
+        editStoryFormShowing: false
+    }
+
+    toggleEditStoryForm = () => {
+        this.setState({
+          editStoryFormShowing: !this.state.editStoryFormShowing
+        })
+     }
+
+render() {
+   const {story} = this.props.location.state
 
     return (
         <div>
@@ -22,14 +34,23 @@ const StoryDetails = (props) => {
             }
             <h3><span role="img">📌 </span>{story.address}</h3>
             <p>{story.content}</p>
-            <button onClick={() => props.addToFavourites(story.id)}>Add To Favourites</button>
-            {props.user.id === story.user.id && (
-                <button onClick={() => props.deleteStory(story.id)}>Delete Story</button>
+            <button onClick={() => this.props.addToFavourites(story.id)}>Add To Favourites</button>
+            {this.props.user.id === story.user.id && (
+                <div>
+                <button onClick={() => this.props.deleteStory(story.id)}>Delete Story</button>
+                <button onClick={() => this.toggleEditStoryForm()}>Edit Story</button>
+                </div>
             )} 
-                    </div>
+            {this.state.editStoryFormShowing && (
+                
+                    <EditStoryForm {...this.props} story={story} user={this.props.user} toggleEditStoryForm={this.toggleEditStoryForm} 
+                    stories={this.props.stories} updateStoriesPatched={this.props.updateStoriesPatched}/>
+                
+            )}
+          </div>
     )
 
-    
+   }
 }
 
 export default StoryDetails;

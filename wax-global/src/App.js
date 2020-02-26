@@ -24,7 +24,17 @@ class App extends React.Component {
     user_id: null,
     latitude: "",
     longitude: "",
-    searchTerm: ""
+    searchTerm: "",
+    
+  }
+
+  updateStoriesPatched = (story, updatedStory) => {
+    const index = this.state.stories.indexOf(story)
+    const storyArray = [...this.state.stories]
+    storyArray.splice(index,1,updatedStory)
+    this.setState({
+        stories: storyArray
+    })
   }
 
   updateSearchTerm = event => {
@@ -45,14 +55,15 @@ class App extends React.Component {
     })
   }
 
-  addToFavourites = (id) =>
+  addToFavourites = (id) => {
   API.post(favouritesUrl, {
     favourite: {
       user_id: this.state.user.id,
       story_id: id,
-
     }
   })
+  alert("Added to your favourites!")
+  }
 
   componentDidMount() {
     // if (this.state.user === null){
@@ -97,6 +108,7 @@ class App extends React.Component {
     .then(this.setState({
       stories: [...this.state.stories].filter(story => story.id !== id)
     }))
+    alert('Story deleted!')
   }
 
   deleteUser = () => {
@@ -104,6 +116,7 @@ class App extends React.Component {
     API.destroy('http://localhost:3000/users', this.state.user.id)
     .then(this.logout(),
     this.props.history.push('/'))
+    alert('Account deleted!')
   }
 
   login = data => {
@@ -121,15 +134,19 @@ class App extends React.Component {
   }
 
   render () {
-    const { stories, mapShowing, user, latitude, longitude } = this.state
+    const { stories, mapShowing, user, latitude, longitude,  } = this.state
     const { toggleMapShowing, logout, login, addToFavourites, updateSearchTerm, 
-      updateStories, deleteStory, deleteUser } = this
+      updateStories, deleteStory, deleteUser, updateStoriesPatched } = this
     const filteredStories = this.filterStories()
   return (
     <div className="App">
-      <div>
+      
+      <img className="top-image" src="https://ecole-surf-srilanka.com/wp-content/uploads/2019/08/s02-surf-coaching-sri-lanka-sunrise.jpg" />
+      
       < NavBar logout={logout} user={user} />
-      </div>
+      
+      
+      <div className="main-position">
       <Switch>
         <Route exact path='/' component={props => (
         <LoginPage {...props} login={login} />)} />
@@ -143,12 +160,15 @@ class App extends React.Component {
           mapShowing={mapShowing} latitude={latitude} longitude={longitude}/> 
         )} />
         <Route exact path='/stories/:id' component={ props => (
-        <StoryDetails {...props} addToFavourites={addToFavourites} user={user} deleteStory={deleteStory}/>)} />
+        <StoryDetails {...props} addToFavourites={addToFavourites} user={user} deleteStory={deleteStory} 
+         stories={stories}
+        updateStoriesPatched={updateStoriesPatched}/>)} />
         <Route exact path='/users/:id' component={ props => (
           <UserDetails {...props} user={user} toggleMapShowing={toggleMapShowing} mapShowing={mapShowing}
           latitude={latitude} longitude={longitude} updateStories={updateStories} deleteUser={deleteUser}/>)}/>
 
       </Switch>
+      </div>
       
       
     </div>
