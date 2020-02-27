@@ -152,7 +152,7 @@ class LoginPage extends React.Component {
              id="outlined-button-file"
              multiple={false}
              type="file"
-             name="file"
+             name="image"
              onChange={(e) => this.handleImageChange(e)}
             />
 

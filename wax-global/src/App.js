@@ -55,14 +55,15 @@ class App extends React.Component {
     })
   }
 
-  addToFavourites = (id) => {
+  addToFavourites = (id, method1, method2) => {
   API.post(favouritesUrl, {
     favourite: {
       user_id: this.state.user.id,
       story_id: id,
     }
-  })
+  }).then(fave => method2(fave))
   alert("Added to your favourites!")
+  method1()
   }
 
   componentDidMount() {

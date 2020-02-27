@@ -200,11 +200,12 @@ class UserDetails extends Component {
                      id="outlined-button-file"
                      multiple={false}
                      type="file"
-                     name="file"
+                     name="image"
                      onChange={(e) => this.handleImageChange(e)}
                      /><br />
                      <label>Video: </label>
                      <input type="file"
+                     name="video"
                      id="upload_widget"
                      accept="video/mp4"
                      multiple={false} 

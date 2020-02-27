@@ -18,7 +18,7 @@ const FavesCard = ({story, toggleMapShowing, deleteFave}) => {
             </div>
             { story[0].image ?
             <img className="image-size"alt='oh no!' src={story[0].image} />
-            : <video className="image-size" controls autoPlay loop>
+            : <video className="image-size" controls autoPlay loop muted>
               <source src={story[0].video} type="video/mp4"/>
             </video>
             }

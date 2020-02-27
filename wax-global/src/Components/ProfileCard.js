@@ -19,7 +19,7 @@ const ProfileCard = ({story, user, toggleMapShowing}) => {
             </div>
             { story.image ?
             <img className="image-size"alt='oh no!' src={story.image} />
-            : <video className="image-size" controls autoPlay loop>
+            : <video className="image-size" controls autoPlay loop muted>
               <source src={story.video} type="video/mp4"/>
             </video>
             }
