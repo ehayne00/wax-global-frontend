@@ -143,14 +143,14 @@ class UserDetails extends Component {
         // debugger
     return (
         
-        <div>
-            <h1>{user.username}</h1>
+        <div >
+            <h1 className="explanation-font">{user.username}</h1>
             <div>{user.image ?
             <img className="profile-image" alt="oh no!" src={user.image} />
             : <img className="profile-image" alt="oh no!" 
              src="https://i.ibb.co/z5Xj6hH/profile-pic.png" /> }
             </div>
-            <p>{user.bio}</p>
+            <p className="user-font">"{user.bio}"</p>
             {this.props.mapShowing &&
             <div><MapView latitude={this.props.latitude} 
             longitude={this.props.longitude} toggleMapShowing={this.props.toggleMapShowing}/></div>}
@@ -219,11 +219,14 @@ class UserDetails extends Component {
                  </form>
                 </div>
             )}
+            {this.state.userStories.length > 0 ? 
             <div className="prof-box">
-               {
+               { 
                    this.state.userStories.map(story => <ProfileCard story={story} user={user} key={story.id} toggleMapShowing={this.props.toggleMapShowing}/>)
                }
             </div>
+            : <h3 className="explanation-font text-color">You have not created any stories yet.</h3>
+            }
         
        
 

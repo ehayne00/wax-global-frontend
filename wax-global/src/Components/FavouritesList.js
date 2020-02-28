@@ -44,23 +44,24 @@ class FavouritesList extends React.Component {
     
 
     return (
-        <div>
-            <p>Use this space to store stories that inspire you/ places you aspire to surf!</p>
-            <h3>Your Favourites:</h3>
-            {this.props.mapShowing &&
+      <div>
+            <p className="explanation-font">Use this space to store stories that inspire you/ places you aspire to surf!</p>
+            <h3 className="explanation-font">Your Favourites:</h3>
+            {this.props.mapShowing && (
             <div><MapView latitude={this.props.latitude} longitude={this.props.longitude}
-            toggleMapShowing={this.props.toggleMapShowing}/></div>}
-            {this.state.myFavouriteStories !== null || this.state.myFavouritesList !== undefined ?
-        <div className="prof-box">
-          { this.state.myFavouriteStories && (
+            toggleMapShowing={this.props.toggleMapShowing}/></div>)}
+          { this.state.myFavouriteStories.length > 0 ?
+          <div className="prof-box">{
               this.state.myFavouriteStories.map(fave => <FavesCard story={fave} key={fave[2].id} 
                 toggleMapShowing={this.props.toggleMapShowing} deleteFave={this.deleteFave}/>)
-          )
-          }
-         </div>
-        : 
-            <h3>You do not have any favourites yet</h3>}
+              }
           </div>
+          :
+          <div>
+            <h3 className="explanation-font text-color">You do not have any favourites yet</h3>
+          </div>
+          }
+      </div>
     )
    }
 }

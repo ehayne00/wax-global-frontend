@@ -8,6 +8,7 @@ const ProfileCard = ({story, user, toggleMapShowing}) => {
     const newStory = {...story, user: user}
 
     return (
+      
         <div className="card"> 
           <div className="thumbnails">{user.image ?
             <img className="thumbnail-image" alt="oh no!" src={user.image} />

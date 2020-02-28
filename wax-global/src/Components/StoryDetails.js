@@ -71,13 +71,13 @@ render() {
 
     return (
         <div>
-            <h3>{story.user.username}</h3>
+            <h3 className="explanation-font name-position">{story.user.username}</h3>
             <div>{story.user.image ?
             <img className="profile-image"alt="oh no!"src={story.user.image}/>
             : <img className="profile-image" alt="oh no!" 
-            src="https://i.ibb.co/9wsq5cz/Screenshot-2020-02-19-at-09-57-20.png" />
+            src="https://i.ibb.co/z5Xj6hH/profile-pic.png" />
             }</div>
-            <h2><u>{story.title}</u></h2>
+            <h2 className="user-font"><u>"{story.title}"</u></h2>
             { story.image ?
             <img className="picture-uploaded"alt="oh no!" src={story.image}/>
             : <video className="picture-uploaded" controls autoPlay loop muted>
@@ -85,7 +85,7 @@ render() {
             </video>
             }
             <h3><span role="img">📌 </span>{story.address}</h3>
-            <p>{story.content}</p>
+            <p className="user-font">"{story.content}"</p>
             {this.state.addToFavouritesButtonShowing &&(
             <button onClick={() => this.props.addToFavourites(story.id, this.toggleFavouriteAndRemoveButtons, this.updateState)}>Add To Favourites</button>
             )}

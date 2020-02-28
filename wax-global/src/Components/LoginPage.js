@@ -71,10 +71,16 @@ class LoginPage extends React.Component {
         const { usernameLogin, passwordLogin, usernameSignup, passwordSignup, email, bio } = this.state
         const { handleChange, handleLogin, toggleLoginForm, handleSignup } = this
         return (
-            <div>
+            <div className="root-explanation">
+              <div >
+              <h4 className="explanation-font">Find where the best surf breaks and destinations are across the globe 
+                 </h4>
+                 <h4 className="secondline explanation-font">and share awesome images, videos and recommendations.</h4>
+                 <h3 className="forsurfers">For surfers, by surfers ...</h3>
+                 </div>
                 {this.state.loginForm ?
-                 <div>
-                     <h3>Enter your login details:</h3>
+                 <div className="loginForm">
+                     <h3 className="explanation-font"><u>Enter your login details:</u></h3>
 
              <form onSubmit={handleLogin}>
                <TextField
@@ -96,19 +102,20 @@ class LoginPage extends React.Component {
        
                <br />
                <br />
-               <Button type="submit" variant='contained' color='primary'>
+               <Button className="button-color" type="submit" variant='contained' color='secondary'>
                  submit
                </Button>
             </form>
 
-               <h3>Or need to...</h3>
-               <Button onClick={toggleLoginForm} variant='contained' color='primary'>
+               <h3 className="explanation-font">Or need to...</h3>
+               <Button className="button-color" onClick={toggleLoginForm} variant='contained' color='secondary'>
                  Sign Up
                </Button>
                </div>
                 :
-                <div>
-                <h3>Enter details to sign-up:</h3>
+                <div className="signup">
+
+        <h3 className="explanation-font"><u>Enter details to sign-up:</u></h3>
 
         <form onSubmit={handleSignup}>       
           <TextField
@@ -159,13 +166,13 @@ class LoginPage extends React.Component {
 
           <br />
           <br />
-          <Button type="submit" variant='contained' color='primary'>
+          <Button className="button-color" type="submit" variant='contained' color='secondary'>
             Submit
           </Button>
         </form>   
 
-          <h3>Or need to...</h3>
-          <Button onClick={toggleLoginForm} variant='contained' color='primary'>
+          <h3 className="explanation-font">Or need to...</h3>
+          <Button className="button-color" onClick={toggleLoginForm} variant='contained' color='secondary'>
             Log In
           </Button>
           </div>

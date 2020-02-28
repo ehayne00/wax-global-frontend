@@ -5,7 +5,7 @@ import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 const MapView = ({google, onMapClicked, onMarkerClick, onInfoWindowClose, latitude, longitude, toggleMapShowing}) => {
     const style = {
         width: '100%',
-        height: '140%'
+        height: '130%'
       }
     return (
         <div>

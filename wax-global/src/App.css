@@ -4,15 +4,55 @@ body {
 
 .navbuttons {
   position: absolute;
-  top: 35%;
+  top: 30%;
   left: 40%;
+}
+
+.loginForm {
+ position: fixed;
+ left: 40%;
+ top: 44%;
+}
+
+.forsurfers {
+  font-family: 'Homemade Apple' ;
+  font-size: 28px; 
+  position: fixed;
+  left: 52%;
+  top: 33%;
+}
+
+.explanation-font {
+  
+  font-family: 'Special Elite' ;
+}
+
+.signup {
+  position: fixed;
+  top: 20%;
+  left: 35%;
+  background-color: rgba(255, 220, 160, 0.94);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.root-explanation {
+  position: fixed;
+  top: 26%;
+  left: 30%;
+}
+
+.secondline {
+  position: fixed;
+  top: 29%;
+  left: 33%;
 }
 
 .wave {
   width: 70px;
   position: absolute;
   left: 66%;
-  top: 21%;
+  top: 16%;
 }
 
 .title {
@@ -20,7 +60,7 @@ body {
   font-family: 'Trade Winds';
   position: absolute;
   left: 30%;
-  top: 8%
+  top: 4%
 
 }
 
@@ -49,7 +89,7 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 
 .map-x {
   font-size: 20px;
-  position: absolute;
+  position: fixed;
   z-index: 40;
   right: 150px;
   top: 170px;
@@ -59,27 +99,52 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 
 .map-view {
   z-index: 30;
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   width: 85%;
   height: 45%;
   margin-left: 5%;
-  background-color: rgba(600, 250, 330, 1);
   padding: 15px;
+  top: 30%
 
 }
 
 .profile-image {
-  max-width: 100px;
-  position: fixed;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  position: absolute;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 100px;
+  padding: 2px;
+  left: 120px;
+  top: -30px;
+}
+
+.name-position {
+  position: absolute;
+  left: 125px;
+  top: 40px;
+}
+
+.loggedinimage {
   width: 150px;
-  left: 100px;
-  top: 100px; 
+  height: 150px;
+  object-fit: cover;
+  position: absolute;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px;
+  left: 450%;
+  top: -380%
+}
+
+.loggedinusername {
+  position: absolute;
+  left: 490%;
+  top: 10%
 }
 
 .picture-uploaded {
@@ -90,11 +155,11 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .text-color {
-  color: grey;
+  color: darkslategray;
 }
 
 .card {
-  padding: 10px;
+  padding: 5px;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -104,6 +169,7 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .prof-box {
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -113,6 +179,16 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
   background-color: rgba(255, 220, 160, 0.7);
   padding: 40px;
   border-radius: 5px;
+}
+
+.profile-positioning {
+  position: absolute;
+  left: 500%;
+}
+
+.user-font {
+  font-size: 30px;
+  font-family: 'Swanky and Moo Moo' ;
 }
 
 .main-position {

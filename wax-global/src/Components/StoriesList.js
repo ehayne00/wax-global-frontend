@@ -6,7 +6,7 @@ const StoriesList = ({ stories, mapShowing, toggleMapShowing, updateSelectedStor
     updateSelectedUserToTargetUser, latitude, longitude, updateSearchTerm }) => {
     return (
         <div>
-            <div className="filter-input"> I want to checkout surf spots in: 
+            <div className="filter-input explanation-font"> I want to checkout surf spots in: 
               <input onChange={updateSearchTerm} placeholder="Enter Country name..." /> 
             </div>
             {mapShowing &&
