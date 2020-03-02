@@ -4,7 +4,32 @@ import API from '../API'
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 
-  
+// function validate(username, email, password) {
+//   // we are going to store errors for all fields
+//   // in a signle array
+//   const errors = [];
+
+//   if (username.length === 0) {
+//     errors.push("Name can't be empty");
+//   }
+
+//   if (email.length < 5) {
+//     errors.push("Email should be at least 5 charcters long");
+//   }
+//   if (email.split("").filter(x => x === "@").length !== 1) {
+//     errors.push("Email should contain a @");
+//   }
+//   if (email.indexOf(".") === -1) {
+//     errors.push("Email should contain at least one dot");
+//   }
+
+//   if (password.length < 6) {
+//     errors.push("Password should be at least 6 characters long");
+//   }
+
+//   return errors;
+// }
+
 
 class LoginPage extends React.Component {
 
@@ -166,13 +191,13 @@ class LoginPage extends React.Component {
 
           <br />
           <br />
-          <Button className="button-color" type="submit" variant='contained' color='secondary'>
+          <Button type="submit" variant='contained' color='secondary'>
             Submit
           </Button>
         </form>   
 
           <h3 className="explanation-font">Or need to...</h3>
-          <Button className="button-color" onClick={toggleLoginForm} variant='contained' color='secondary'>
+          <Button onClick={toggleLoginForm} variant='contained' color='secondary'>
             Log In
           </Button>
           </div>

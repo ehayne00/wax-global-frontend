@@ -8,12 +8,10 @@ import LoginPage from './Components/LoginPage'
 import FavouritesList from './Components/FavouritesList'
 import StoryDetails from './Components/StoryDetails';
 import UserDetails from './Components/UserDetails';
-// import { GoogleComponent } from 'react-google-location'
+
 
 const favouritesUrl = 'http://localhost:3000/favourites'
-// const widget = cloudinary.createUploadWidget({ 
-//   cloudName: "demo", uploadPreset: "preset1" }, (error, result) => { });
-// widget.open();
+
 
 class App extends React.Component {
 
@@ -37,6 +35,14 @@ class App extends React.Component {
     })
   }
 
+  updateUserPatched = (updatedUser) => {
+    let { user } = this.state
+    let newUser = Object.assign( user, updatedUser.user) 
+     this.setState({
+       user: newUser
+     })
+  }
+
   updateSearchTerm = event => {
     this.setState({
         searchTerm: event.target.value
@@ -51,7 +57,7 @@ class App extends React.Component {
 
   updateStories = (story) => {
     this.setState({
-      stories: [...this.state.stories, story]
+      stories: [story, ...this.state.stories]
     })
   }
 
@@ -77,7 +83,7 @@ class App extends React.Component {
       .then(data => {
         if (data.error) throw Error(data.error)
         this.login(data)
-        // this.props.history.push('/stories')
+        this.props.history.push('/stories')
       }).catch(error => alert(error))
     }
 
@@ -137,7 +143,7 @@ class App extends React.Component {
   render () {
     const { stories, mapShowing, user, latitude, longitude,  } = this.state
     const { toggleMapShowing, logout, login, addToFavourites, updateSearchTerm, 
-      updateStories, deleteStory, deleteUser, updateStoriesPatched } = this
+      updateStories, deleteStory, deleteUser, updateStoriesPatched, updateUserPatched } = this
     const filteredStories = this.filterStories()
   return (
     <div className="App">
@@ -166,7 +172,7 @@ class App extends React.Component {
         updateStoriesPatched={updateStoriesPatched}/>)} />
         <Route exact path='/users/:id' component={ props => (
           <UserDetails {...props} user={user} toggleMapShowing={toggleMapShowing} mapShowing={mapShowing}
-          latitude={latitude} longitude={longitude} updateStories={updateStories} deleteUser={deleteUser}/>)}/>
+          latitude={latitude} longitude={longitude} updateStories={updateStories} deleteUser={deleteUser} updateUserPatched={updateUserPatched}/>)}/>
 
       </Switch>
       </div>

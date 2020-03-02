@@ -44,8 +44,10 @@ class FavouritesList extends React.Component {
     
 
     return (
-      <div>
+      <div className="prof-box2">
+        <div >
             <p className="explanation-font">Use this space to store stories that inspire you/ places you aspire to surf!</p>
+            </div>
             <h3 className="explanation-font">Your Favourites:</h3>
             {this.props.mapShowing && (
             <div><MapView latitude={this.props.latitude} longitude={this.props.longitude}

@@ -2,10 +2,92 @@ body {
   background-color: orange;
 }
 
+/* .content-width {
+ 
+} */
+
+.createstory-container {
+  position: fixed;
+  top: 30%;
+  background-color: rgba(255, 255, 230, 0.94);
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 10%;
+  margin-bottom: 10%;
+  z-index: 100;
+}
+
+.cards-container {
+  text-align: center;
+}
+
+.button-four {
+ position: absolute;
+ bottom: 4px;
+}
+
+.button-five {
+ position: absolute;
+ bottom: 40px;
+ right: 140px;
+}
+
+.button-six {
+ position: absolute;
+ bottom: 40px;
+ left: 116px;
+}
+
+.button-one {
+  position: absolute;
+  left: -20px;
+  top: 10px;
+}
+
+.address-background {
+  background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(0,0,0,1));
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  width: 300px;
+  height: 25px;
+  
+}
+
+.h4-position {
+  position: absolute;
+  top: -20px;
+  right: 20px;
+}
+
+.button-two {
+  position: absolute;
+  top: 10px;
+}
+
+.button-three {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+.button-six {
+  position: absolute;
+  left: 20px;
+  top: 0px;
+}
+
+.button-seven {
+  position: absolute;
+  left: 40px;
+  top: 0px;
+}
+
 .navbuttons {
   position: absolute;
   top: 30%;
   left: 40%;
+  
 }
 
 .loginForm {
@@ -56,7 +138,7 @@ body {
 }
 
 .title {
-  font-size: 80px;
+  font-size: 500%;
   font-family: 'Trade Winds';
   position: absolute;
   left: 30%;
@@ -65,22 +147,24 @@ body {
 }
 
 .top-image {
-max-width: 100%;
-max-height: 10%;
+width: 100%;
+height: auto;
+object-fit: cover;
 z-index: 10;
 mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .image-size {
   max-width: 300px;
-  max-height: 200px;
-  
+  height: 200px;
+  object-fit: cover;
 }
 
 .thumbnail-name {
   font-size: 10px;
   font-weight: bold;
   background-color: rgba(230, 230, 225, 0.5);
+  
 }
 
 .filter-input {
@@ -89,12 +173,17 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 
 .map-x {
   font-size: 20px;
+  background-color: red;
   position: fixed;
   z-index: 40;
-  right: 150px;
-  top: 170px;
-  color: purple;
+  right: 160px;
+  top: 180px;
+  transition-duration: 0.4s
+}
 
+.map-x:hover {
+  background-color: firebrick;
+  color: white;
 }
 
 .map-view {
@@ -107,7 +196,7 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
   height: 45%;
   margin-left: 5%;
   padding: 15px;
-  top: 30%
+  top: 20%
 
 }
 
@@ -119,8 +208,8 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
   border: 1px solid #ddd;
   border-radius: 100px;
   padding: 2px;
-  left: 120px;
-  top: -30px;
+  left: 190px;
+  top: 30px;
 }
 
 .name-position {
@@ -137,14 +226,14 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 5px;
-  left: 450%;
-  top: -380%
+  left: 140%;
+  top: -350%;
 }
 
 .loggedinusername {
   position: absolute;
-  left: 490%;
-  top: 10%
+  left:155%;
+  top: 30px;
 }
 
 .picture-uploaded {
@@ -166,6 +255,7 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
   border-radius: 5px;
   width: 300px;
   overflow: hidden;
+  margin-bottom: 15px;
 }
 
 .prof-box {
@@ -173,10 +263,26 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  width: 85%;
+  width: 80%;
   height: 50%;
-  margin-left: 5%;
+  margin: auto;
+  margin-left: 100px;
+  margin-right: 100px;
   background-color: rgba(255, 220, 160, 0.7);
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.prof-box2 {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 80%;
+  height: 50%;
+  margin: auto;
+  margin-left: 50px;
+  margin-right: 200px;
   padding: 40px;
   border-radius: 5px;
 }
@@ -202,12 +308,17 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 
 .thumbnail-image {
   border-radius: 50%;
-  max-width: 40px;
-  
+  width: 35px;
+  height: 35px;
+  object-fit:cover;
+
 }
+
+
 .thumbnails {
   position: absolute;
   z-index: 20;
+  
 }
 
 

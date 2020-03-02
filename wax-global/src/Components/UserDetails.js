@@ -6,6 +6,8 @@ import PlacesAutocomplete, {
     geocodeByAddress, getLatLng
 } from 'react-places-autocomplete'
 import EditUserForm from './EditUserForm'
+import { Button } from '@material-ui/core'
+import { TextField } from '@material-ui/core'
 const storyUrl = 'http://localhost:3000/stories'
 // const API_KEY = 'AIzaSyAgUGzj-VxQPQ1P0uaVNt6r62c9B1rP6Go'
 
@@ -23,7 +25,14 @@ class UserDetails extends Component {
         longitude: "",
         address: "",
         video: "",
-        country: ""
+        country: "",
+        sortBy: "Image"
+    }
+
+    updateSortBy = e => {
+        this.setState({
+            sortBy: e.target.value
+        })
     }
 
     setVideo = e => {
@@ -99,7 +108,7 @@ class UserDetails extends Component {
 
         API.post(storyUrl, bodyObj)
         .then(story => (this.setState({
-            userStories: [...this.state.userStories, story]
+            userStories: [story, ...this.state.userStories]
         }), this.props.updateStories(story)))
         this.toggleCreateFormShowing()
         alert("creating story! - this may take a few mins")
@@ -143,7 +152,7 @@ class UserDetails extends Component {
         // debugger
     return (
         
-        <div >
+        <div className="prof-box2">
             <h1 className="explanation-font">{user.username}</h1>
             <div>{user.image ?
             <img className="profile-image" alt="oh no!" src={user.image} />
@@ -157,14 +166,19 @@ class UserDetails extends Component {
             {this.props.user === user && (
 
             <div>
-              <button onClick={() => this.props.deleteUser()}>Delete My Account</button>
-              <button onClick={() => this.toggleEditFormShowing()}>Edit My Profile</button>
-              <button onClick={() => this.toggleCreateFormShowing()}>Create Story</button>
+              <Button variant='contained' color='secondary'onClick={() => this.props.deleteUser()}>Delete My Account</Button>
+              <Button className="button-six"variant='contained' color='secondary'onClick={() => this.toggleEditFormShowing()}>Edit My Profile</Button>
+              <Button className="button-seven"variant='contained' color='secondary'onClick={() => this.toggleCreateFormShowing()}>Create Story</Button>
             </div>
             )}
 
+        {this.state.editFormShowing && (
+            <EditUserForm user={this.props.user} toggleEditFormShowing={this.toggleEditFormShowing} updateUserPatched={this.props.updateUserPatched}/>
+        )} 
+
             {this.state.createFormShowing && ( 
-                <div>
+                <div className="createstory-container">
+                    <Button variant='contained' color='secondary' onClick={this.toggleCreateFormShowing}>x</Button>
                 <h1>Create Story Form:</h1>
                 <p>(Upload one image <u>or</u> video per story, videos take a few minutes to upload. You will see your story once the video has finished uploading.)</p>
 
@@ -194,6 +208,18 @@ class UserDetails extends Component {
 
                 
                 <form onSubmit={(event) => this.handleSubmit(event)}>
+                    <label>
+                        <input type="radio" value="Image"
+                        checked={this.state.sortBy === "Image" ? true : false} onChange={this.updateSortBy} />
+                        Image
+                    </label>
+                    <label>
+                        <input type="radio" value="Video"
+                        checked={this.state.sortBy === "Video" ? true : false } onChange={this.updateSortBy} />
+                        Video
+                    </label>
+                    {this.state.sortBy === "Image" && (
+                        <div>
                     <label>Image: </label>
                      <input
                      accept="image/*"      
@@ -202,7 +228,10 @@ class UserDetails extends Component {
                      type="file"
                      name="image"
                      onChange={(e) => this.handleImageChange(e)}
-                     /><br />
+                     /><br /></div>
+                    )}
+                    {this.state.sortBy === "Video" && (
+                     <div>
                      <label>Video: </label>
                      <input type="file"
                      name="video"
@@ -210,7 +239,8 @@ class UserDetails extends Component {
                      accept="video/mp4"
                      multiple={false} 
                      onChange={(e) => this.setVideo(e)}/><br />
-
+                    </div>
+                    )}
                     <label>Title: </label>
                     <input onChange={this.updateFormData} name='title' /><br />
                     <label>Content: </label>
@@ -225,14 +255,9 @@ class UserDetails extends Component {
                    this.state.userStories.map(story => <ProfileCard story={story} user={user} key={story.id} toggleMapShowing={this.props.toggleMapShowing}/>)
                }
             </div>
-            : <h3 className="explanation-font text-color">You have not created any stories yet.</h3>
+            : <h3 className="explanation-font text-color">No stories created yet.</h3>
             }
-        
-       
 
-        {this.state.editFormShowing && (
-            <EditUserForm user={this.props.user} toggleEditFormShowing={this.toggleEditFormShowing}/>
-        )} 
         </div>
              )
         }

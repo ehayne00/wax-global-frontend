@@ -3,6 +3,7 @@ import API from '../API'
 import PlacesAutocomplete, {
     geocodeByAddress, getLatLng
 } from 'react-places-autocomplete'
+import { Button } from '@material-ui/core'
 
      
    
@@ -102,7 +103,8 @@ class EditStoryForm extends React.Component {
 
      render(){
        return (
-    <div>
+    <div className="createstory-container">
+      <Button variant="contained" color="secondary" onClick={this.props.toggleEditStoryForm}>x</Button>
     <h1>Edit Story Form:</h1>
     <p>(Upload one image <u>or</u> video per story, videos take a few minutes to upload. You will see your story once the video has finished uploading.)</p>
 
@@ -132,23 +134,33 @@ class EditStoryForm extends React.Component {
 
     
     <form onSubmit={(event) => this.handleSubmit(event)}>
-        {/* <label>Image: </label>
+      {/* {this.state.image && (
+        <div>
+        <label>Image: </label>
          <input
          accept="image/*" 
          value={this.state.image}     
          id="outlined-button-file"
          multiple={false}
          type="file"
-         name="file"
+         name="image"
          onChange={(e) => this.handleImageChange(e)}
          /><br />
+         </div>
+      )}
+      {this.state.video && (
+        <div>
          <label>Video: </label>
          <input type="file"
          value={this.state.video}
          id="upload_widget"
          accept="video/mp4"
          multiple={false} 
-         onChange={(e) => this.setVideo(e)}/><br /> */}
+         name="video"
+         onChange={(e) => this.setVideo(e)}/><br />
+         </div>
+       )} */}
+
 
         <label>Title: </label>
         <input onChange={this.updateFormData} name='title' value={this.state.title}/><br />

@@ -27,25 +27,24 @@ import { Button } from '@material-ui/core'
         }
 
         API.patch('http://localhost:3000/users', this.props.user.id, obj)
-        .then(data => {
+        .then(updatedUser => (
+          this.props.updateUserPatched(updatedUser),
           
-          if (data.error) throw Error(data.error)
           this.setState({
-              username: data.user.username,
-              email: data.user.email,
-              profileImage: data.user.image,
-              bio: data.user.bio
+              username: updatedUser.user.username,
+              email: updatedUser.user.email,
+              profileImage: updatedUser.user.image,
+              bio: updatedUser.user.bio
           })
           
-        })
+        ))
         .catch(error => alert(error))  
 
         alert("Info updated!")
         this.props.toggleEditFormShowing()
 
     }
-      
-    
+        
     handleChange = event => {
           this.setState({ [event.target.name]: event.target.value })
     }
@@ -65,7 +64,8 @@ import { Button } from '@material-ui/core'
     render() {
         const { user} = this.props
      return (
-         <div>
+         <div className="createstory-container">
+           <Button variant='contained' color='secondary' onClick={this.props.toggleEditFormShowing}>x</Button>
      <h3>Enter the details you wish to change:</h3>
 
         <form onSubmit={this.handleSubmit}>       
@@ -108,9 +108,9 @@ import { Button } from '@material-ui/core'
             <input
              accept="image/*"      
              id="outlined-button-file"
-             multiple
+             multiple={false}
              type="file"
-             name="file"
+             name="image"
              value={this.state.image}
              onChange={(e) => this.handleImageChange(e)}
             />
@@ -118,7 +118,7 @@ import { Button } from '@material-ui/core'
 
           <br />
           <br />
-          <Button type="submit" variant='contained' color='primary'>
+          <Button type="submit" variant='contained' color='secondary'>
             Submit
           </Button>
         </form>  

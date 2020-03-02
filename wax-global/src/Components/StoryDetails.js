@@ -1,6 +1,8 @@
 import React from 'react'
 import EditStoryForm from './EditStoryForm'
 import API from '../API'
+import { Button } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 
 class StoryDetails extends React.Component {
@@ -70,13 +72,17 @@ render() {
    const {story} = this.props.location.state
 
     return (
-        <div>
+        <div className="content-width">
+
+            <Link to={{pathname: `/users/${story.user_id}`,
+            state: {user: story.user}}} >
             <h3 className="explanation-font name-position">{story.user.username}</h3>
             <div>{story.user.image ?
             <img className="profile-image"alt="oh no!"src={story.user.image}/>
             : <img className="profile-image" alt="oh no!" 
             src="https://i.ibb.co/z5Xj6hH/profile-pic.png" />
             }</div>
+            </Link>
             <h2 className="user-font"><u>"{story.title}"</u></h2>
             { story.image ?
             <img className="picture-uploaded"alt="oh no!" src={story.image}/>
@@ -85,19 +91,23 @@ render() {
             </video>
             }
             <h3><span role="img">📌 </span>{story.address}</h3>
+            <div >
             <p className="user-font">"{story.content}"</p>
+            </div>
+            <div>
             {this.state.addToFavouritesButtonShowing &&(
-            <button onClick={() => this.props.addToFavourites(story.id, this.toggleFavouriteAndRemoveButtons, this.updateState)}>Add To Favourites</button>
+            <Button className="button-four"variant='contained'color='secondary' onClick={() => this.props.addToFavourites(story.id, this.toggleFavouriteAndRemoveButtons, this.updateState)}>Add To Favourites</Button>
             )}
             {this.state.removeFromFavouritesButtonShowing &&(
-            <button onClick={() => this.deleteFave(this.state.myFavouriteInstances, story, this.props.user)}>Remove From Favourites</button>
+            <Button className="button-four"variant='contained' color='secondary' onClick={() => this.deleteFave(this.state.myFavouriteInstances, story, this.props.user)}>Remove From Favourites</Button>
             )}
             {this.props.user.id === story.user.id && (
                 <div>
-                <button onClick={() => this.props.deleteStory(story.id)}>Delete Story</button>
-                <button onClick={() => this.toggleEditStoryForm()}>Edit Story</button>
+                <Button className="button-five" variant='contained' color='secondary'onClick={() => this.props.deleteStory(story.id)}>Delete Story</Button>
+                <Button className="button-six" variant='contained' color='secondary'onClick={() => this.toggleEditStoryForm()}>Edit Story</Button>
                 </div>
             )} 
+            </div>
             {this.state.editStoryFormShowing && (
                 
                     <EditStoryForm {...this.props} story={story} user={this.props.user} toggleEditStoryForm={this.toggleEditStoryForm} 
