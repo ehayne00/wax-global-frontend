@@ -9,9 +9,9 @@ const MapView = ({google, onMapClicked, onMarkerClick, onInfoWindowClose, latitu
         height: '130%'
       }
     return (
-        <div>
+        <div className="map-view">
            <button className="map-x"onClick={() => toggleMapShowing(latitude, longitude)}><u>Exit Map View</u></button>
-            <div className="map-view">
+            <div >
             <Map           
             google={google}
             style={style}

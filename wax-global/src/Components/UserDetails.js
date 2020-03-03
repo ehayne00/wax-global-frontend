@@ -177,7 +177,7 @@ class UserDetails extends Component {
 
             <div>
               <Button variant='contained' color='secondary'onClick={() => this.props.deleteUser()}>Delete My Account</Button>
-              <Button className="button-six"variant='contained' color='secondary'onClick={() => this.toggleEditFormShowing()}>Edit My Profile</Button>
+              <Button className="button-nine"variant='contained' color='secondary'onClick={() => this.toggleEditFormShowing()}>Edit My Profile</Button>
               <Button className="button-seven"variant='contained' color='secondary'onClick={() => this.toggleCreateFormShowing()}>Create Story</Button>
             </div>
             )}
@@ -260,7 +260,7 @@ class UserDetails extends Component {
                 </div>
             )}
             {this.state.userStories.length > 0 ? 
-            <div className="prof-box">
+            <div className="prof-box3">
                { 
                    this.state.userStories.map(story => <ProfileCard story={story} user={user} key={story.id} toggleMapShowing={this.props.toggleMapShowing}/>)
                }

@@ -53,7 +53,7 @@ class FavouritesList extends React.Component {
             <div><MapView latitude={this.props.latitude} longitude={this.props.longitude}
             toggleMapShowing={this.props.toggleMapShowing}/></div>)}
           { this.state.myFavouriteStories.length > 0 ?
-          <div className="prof-box">{
+          <div className="prof-box3">{
               this.state.myFavouriteStories.map(fave => <FavesCard story={fave} key={fave[2].id} 
                 toggleMapShowing={this.props.toggleMapShowing} deleteFave={this.deleteFave}/>)
               }

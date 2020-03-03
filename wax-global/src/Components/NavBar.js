@@ -7,7 +7,7 @@ const NavBar = ({ logout, user }) => {
     return(
       <nav className="nav">
         
-        <h1 className="title">Wax Global</h1> <img className="wave"src={wave}/>
+        <div className="title"><h1 >Wax Global</h1> <img className="wave"src={wave}/></div>
         
             {user !== null ? (
             <div className="navbuttons">

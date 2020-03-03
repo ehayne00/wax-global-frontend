@@ -72,7 +72,7 @@ render() {
    const {story} = this.props.location.state
 
     return (
-        <div className="content-width">
+        <div className="prof-box4">
 
             <Link to={{pathname: `/users/${story.user_id}`,
             state: {user: story.user}}} >
@@ -92,7 +92,7 @@ render() {
             }
             <h3><span role="img">📌 </span>{story.address}</h3>
             <div >
-            <p className="user-font">"{story.content}"</p>
+            <p className="user-font story-text">"{story.content}"</p>
             </div>
             <div>
             {this.state.addToFavouritesButtonShowing &&(

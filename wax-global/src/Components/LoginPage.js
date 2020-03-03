@@ -75,8 +75,8 @@ class LoginPage extends React.Component {
 
     handleImageChange = e => {
       
-      let files = e.target.files;
-      console.log(e.target.files)
+      let files = e.target.files
+     
       let reader = new FileReader();
       reader.readAsDataURL(files[0]);
 
