@@ -156,7 +156,7 @@ class App extends React.Component {
       <div className="main-position">
       <Switch>
         <Route exact path='/' component={props => (
-        <LoginPage {...props} login={login} />)} />
+          <LoginPage {...props} login={login} />)} />
         <Route exact path='/stories' render={ props => (
           <StoriesList {...props} stories={filteredStories} mapShowing={mapShowing} 
           toggleMapShowing={toggleMapShowing} latitude={latitude} 

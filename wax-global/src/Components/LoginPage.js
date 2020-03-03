@@ -5,8 +5,6 @@ import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 
 // function validate(username, email, password) {
-//   // we are going to store errors for all fields
-//   // in a signle array
 //   const errors = [];
 
 //   if (username.length === 0) {
@@ -78,6 +76,7 @@ class LoginPage extends React.Component {
     handleImageChange = e => {
       
       let files = e.target.files;
+      console.log(e.target.files)
       let reader = new FileReader();
       reader.readAsDataURL(files[0]);
 

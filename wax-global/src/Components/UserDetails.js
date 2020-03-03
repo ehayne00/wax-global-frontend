@@ -107,11 +107,21 @@ class UserDetails extends Component {
         }
 
         API.post(storyUrl, bodyObj)
-        .then(story => (this.setState({
-            userStories: [story, ...this.state.userStories]
-        }), this.props.updateStories(story)))
-        this.toggleCreateFormShowing()
-        alert("creating story! - this may take a few mins")
+        .then(story => {
+            
+            if (story.error) throw Error(story.error)
+            this.setState({
+                    userStories: [story, ...this.state.userStories]
+                }, ()=>{
+                        this.props.updateStories(story)
+                        this.toggleCreateFormShowing()
+                        alert("created story! - it may take a moment to load")
+                    })
+            }
+        //     (, )})
+        )
+        .catch(error => alert(error))
+        alert("creating...")
     }
 
 
