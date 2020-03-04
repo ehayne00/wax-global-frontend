@@ -22,7 +22,7 @@ class App extends React.Component {
     user_id: null,
     latitude: "",
     longitude: "",
-    searchTerm: "",
+    searchTerm: ""
     
   }
 
@@ -127,6 +127,7 @@ class App extends React.Component {
   }
 
   login = data => {
+    
     this.setState({
       
       user_id: data.user.id,

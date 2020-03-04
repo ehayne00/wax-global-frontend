@@ -14,26 +14,72 @@ const get = url =>
     }
   }).then(resp => resp.json())
 
-const post = (url, data) => 
-  fetch(url, {
+const post = (url, user ) => {
+const formData = new FormData()
+formData.append('picture', user.profileImage)
+formData.append('username', user.usernameSignup)
+formData.append('password', user.passwordSignup)
+formData.append('email', user.email)
+formData.append('bio', user.bio)
+
+  return fetch(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accepts': 'application/json'
-      },
-      body: JSON.stringify(data)
+      body: formData
   }).then(resp => resp.json())
+}
+
+const post2 = (url, story ) => {
+  const formData = new FormData()
+  formData.append('user_id', story.user_id)
+  formData.append('picture', story.image)
+  formData.append('title', story.title)
+  formData.append('content', story.content)
+  formData.append('address', story.address)
+  formData.append('latitude', story.latitude)
+  formData.append('longitude', story.longitude)
+  formData.append('movie', story.video)
+  formData.append('country', story.country)
+
+  return fetch(url, {
+    method: 'POST',
+    body: formData
+  }).then(resp => resp.json())
+}
 
 
-const patch = (url, id, data) =>
-  fetch(`${url}/${id}`, {
+const patch = (url, id, user) => {
+const formData = new FormData()
+
+formData.append('username', user.username)
+formData.append('password', user.password)
+formData.append('email', user.email)
+formData.append('picture', user.image)
+formData.append('bio', user.bio)
+
+  return fetch(`${url}/${id}`, {
       method: 'PATCH',
-      headers: {
-         'Content-Type': 'application/json',
-         'Accepts': 'application/json'
-         },
-         body: JSON.stringify(data)
+         body: formData
          }).then(resp => resp.json())
+        }
+
+const patch2 = (url, id, story) => {
+  const formData = new FormData()
+          
+  formData.append('user_id', story.user_id)
+  formData.append('picture', story.image)
+  formData.append('title', story.title)
+  formData.append('content', story.content)
+  formData.append('address', story.address)
+  formData.append('latitude', story.latitude)
+  formData.append('longitude', story.longitude)
+  formData.append('movie', story.video)
+  formData.append('country', story.country)
+          
+     return fetch(`${url}/${id}`, {
+        method: 'PATCH',
+            body: formData
+            }).then(resp => resp.json())
+         }
          
 
 const destroy = (url, id) =>
@@ -50,15 +96,7 @@ const login = (username, password) => post(loginUrl,
     }
   )
 
-const createAccount = (username, password, email, image, bio) => post(usersUrl,
-      {user:
-        {username: username,
-          password: password,
-          email: email,
-          image: image,
-          bio: bio
-        }
-      })
+const createAccount = user => post(usersUrl, user)
 
       const fetchUserFavourites = (url) => get(fetchUserFavouritesUrl)
 
@@ -72,4 +110,4 @@ const createAccount = (username, password, email, image, bio) => post(usersUrl,
 
 const validate = () => get(validateUrl)
 
-export default { login, validate, createAccount, post, patch, destroy, fetchUserFavourites, fetchUserStories }
+export default { login, validate, createAccount, post, post2, patch, patch2, destroy, fetchUserFavourites, fetchUserStories }

@@ -36,28 +36,21 @@ class UserDetails extends Component {
     }
 
     setVideo = e => {
-        let files = e.target.files;
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-  
-        reader.onload= e =>{
-          this.setState({
-            video: e.target.result
-          })
-        }
+        let files = e.target.files[0]
+      
+        this.setState({
+          video: files
+        })
+      
     }
 
     handleImageChange = e => {
-        let files = e.target.files;
-
-        let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-  
-        reader.onload= e =>{
-          this.setState({
-            image: e.target.result
-          })
-        }
+        let files = e.target.files[0]
+      
+        this.setState({
+          image: files
+        })
+      
 
       }
 
@@ -106,7 +99,7 @@ class UserDetails extends Component {
             country: this.state.country
         }
 
-        API.post(storyUrl, bodyObj)
+        API.post2(storyUrl, bodyObj)
         .then(story => {
             
             if (story.error) throw Error(story.error)
@@ -118,7 +111,6 @@ class UserDetails extends Component {
                         alert("created story! - it may take a moment to load")
                     })
             }
-        //     (, )})
         )
         .catch(error => alert(error))
         alert("creating...")
@@ -255,7 +247,7 @@ class UserDetails extends Component {
                     <input onChange={this.updateFormData} name='title' /><br />
                     <label>Content: </label>
                     <textarea onChange={this.updateFormData} name='content' type="text-area" /><br />
-                    <button>Create Story</button>
+                    <Button variant='contained' color='secondary' type="submit" >Create Story</Button>
                  </form>
                 </div>
             )}

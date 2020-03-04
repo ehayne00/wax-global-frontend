@@ -4,29 +4,7 @@ import API from '../API'
 import { TextField } from '@material-ui/core'
 import { Button } from '@material-ui/core'
 
-// function validate(username, email, password) {
-//   const errors = [];
 
-//   if (username.length === 0) {
-//     errors.push("Name can't be empty");
-//   }
-
-//   if (email.length < 5) {
-//     errors.push("Email should be at least 5 charcters long");
-//   }
-//   if (email.split("").filter(x => x === "@").length !== 1) {
-//     errors.push("Email should contain a @");
-//   }
-//   if (email.indexOf(".") === -1) {
-//     errors.push("Email should contain at least one dot");
-//   }
-
-//   if (password.length < 6) {
-//     errors.push("Password should be at least 6 characters long");
-//   }
-
-//   return errors;
-// }
 
 
 class LoginPage extends React.Component {
@@ -57,9 +35,8 @@ class LoginPage extends React.Component {
       
     handleSignup = (event) => {
         event.preventDefault()
-        API.createAccount(this.state.usernameSignup, this.state.passwordSignup, this.state.email, this.state.profileImage, this.state.bio )
+        API.createAccount(this.state)
         .then(data => {
-          
           if (data.error) throw Error(data.error)
           this.props.login(data)
     
@@ -75,16 +52,12 @@ class LoginPage extends React.Component {
 
     handleImageChange = e => {
       
-      let files = e.target.files
-     
-      let reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-
-      reader.onload= e =>{
+      let files = e.target.files[0]
+      
         this.setState({
-          profileImage: e.target.result
+          profileImage: files
         })
-      }
+      
     }
     
     toggleLoginForm = () => {
