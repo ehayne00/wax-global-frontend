@@ -9,9 +9,10 @@ import { Button } from '@material-ui/core'
 
     state = {
         username: this.props.user.username,
-        password: "",
+        password: this.props.user.password,
         email: this.props.user.email,
-        profileImage:this.props.user.image,
+        imageUrl: this.props.user.image,
+        profileImage: null,
         bio:this.props.user.bio
     }
 
@@ -33,6 +34,7 @@ import { Button } from '@material-ui/core'
           this.setState({
               username: updatedUser.user.username,
               email: updatedUser.user.email,
+              password: updatedUser.user.password,
               profileImage: updatedUser.user.image,
               bio: updatedUser.user.bio
           })
@@ -50,15 +52,11 @@ import { Button } from '@material-ui/core'
     }
 
     handleImageChange = e => {
-      let files = e.target.files;
-      let reader = new FileReader();
-      reader.readAsDataURL(files[0]);
-
-      reader.onload= e =>{
+      let files = e.target.files[0]
         this.setState({
-          profileImage: e.target.result
+          profileImage: files
         })
-      }
+      
     }
 
     render() {
