@@ -46,6 +46,17 @@ const post2 = (url, story ) => {
   }).then(resp => resp.json())
 }
 
+const post3 = (url, data) => 
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accepts': 'application/json'
+    },
+    body: JSON.stringify(data)
+  }).then(resp => resp.json())
+ 
+
 
 const patch = (url, id, user) => {
 const formData = new FormData()
@@ -88,7 +99,7 @@ const destroy = (url, id) =>
       })
 
 
-const login = (username, password) => post(loginUrl, 
+const login = (username, password) => post3(loginUrl, 
     {user: 
         { username:username,
             password:password

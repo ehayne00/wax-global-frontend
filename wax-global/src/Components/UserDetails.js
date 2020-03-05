@@ -24,6 +24,7 @@ class UserDetails extends Component {
         latitude: "",
         longitude: "",
         address: "",
+        place:"",
         video: "",
         country: "",
         sortBy: "Image"
@@ -63,10 +64,22 @@ class UserDetails extends Component {
     }
     
     setAddress = e => {
-        const place = e.split(", ")
+        e = e.replace(/,/g," -")
+        let place =  e.split(" - ")
+    //    let place =  e.split(/[,\-]/g)
+        
         const country = place[place.length-1]
+        const town = place[0]
+        town !== country ?
         this.setState({
-            address: e,
+            place: e,
+            address: `${town}, ${country}`,
+            country: country
+        })
+        :
+        this.setState({
+            place: e,
+            address: `${country}`,
             country: country
         })
     }
@@ -184,7 +197,7 @@ class UserDetails extends Component {
                 <h1>Create Story Form:</h1>
                 <p>(Upload one image <u>or</u> video per story, videos take a few minutes to upload. You will see your story once the video has finished uploading.)</p>
 
-                <PlacesAutocomplete name='address' value={this.state.address} onChange={(e) =>this.setAddress(e)} onSelect={this.handleSelect}>
+                <PlacesAutocomplete name='address' value={this.state.place} onChange={(e) =>this.setAddress(e)} onSelect={this.handleSelect}>
                     {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
                         <div>
                             <label>Town/region and country: </label>

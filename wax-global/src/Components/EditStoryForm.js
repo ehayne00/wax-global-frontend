@@ -19,28 +19,17 @@ class EditStoryForm extends React.Component {
   };
 
   setVideo = e => {
-    let files = e.target.files;
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = e => {
-      this.setState({
-        video: e.target.result
-      });
-    };
+    let files = e.target.files[0]
+        this.setState({
+         video: files
+        })
   };
 
   handleImageChange = e => {
-    let files = e.target.files;
-
-    let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-
-    reader.onload = e => {
-      this.setState({
-        image: e.target.result
-      });
-    };
+    let files = e.target.files[0]
+        this.setState({
+          image: files
+        })
   };
 
   setCoordinates = e => {
@@ -87,14 +76,14 @@ class EditStoryForm extends React.Component {
       country: this.state.country
     };
 
-    API.patch("http://localhost:3000/stories", this.props.story.id, bodyObj)
+    API.patch2("http://localhost:3000/stories", this.props.story.id, bodyObj)
       .then(
         updatedStory =>
           this.props.updateStoriesPatched(this.props.story, updatedStory)
         // if (data.error) throw Error(data.error)
       )
       .catch(error => alert(error));
-    alert("Story updating!");
+    alert("Story updating!..");
     this.props.toggleEditStoryForm();
     this.props.history.push("/stories");
   };
@@ -196,7 +185,7 @@ class EditStoryForm extends React.Component {
             type="text-area"
           />
           <br />
-          <button>Update Story</button>
+          <Button type="submit" variant="contained" color="secondary" >Update Story</Button>
         </form>
       </div>
     );

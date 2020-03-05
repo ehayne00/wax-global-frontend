@@ -105,7 +105,7 @@ class LoginPage extends React.Component {
             </form>
 
                <h3 className="explanation-font">Or need to...</h3>
-               <Button className="button-color" onClick={toggleLoginForm} variant='contained' color='secondary'>
+               <Button className="button-color" onClick={toggleLoginForm} variant="outlined" color='secondary'>
                  Sign Up
                </Button>
                </div>
@@ -169,7 +169,7 @@ class LoginPage extends React.Component {
         </form>   
 
           <h3 className="explanation-font">Or need to...</h3>
-          <Button onClick={toggleLoginForm} variant='contained' color='secondary'>
+          <Button onClick={toggleLoginForm} variant='outlined' color='secondary'>
             Log In
           </Button>
           </div>
