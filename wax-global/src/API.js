@@ -121,4 +121,4 @@ const createAccount = user => post(usersUrl, user)
 
 const validate = () => get(validateUrl)
 
-export default { login, validate, createAccount, post, post2, patch, patch2, destroy, fetchUserFavourites, fetchUserStories }
+export default { login, validate, createAccount, post, post2, post3, patch, patch2, destroy, fetchUserFavourites, fetchUserStories }
