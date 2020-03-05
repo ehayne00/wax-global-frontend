@@ -76,12 +76,14 @@ render() {
 
             <Link to={{pathname: `/users/${story.user_id}`,
             state: {user: story.user}}} >
-            <h3 className="explanation-font name-position">{story.user.username}</h3>
+            <div className="name-pic-div">
+            <h3 className="explanation-font">{story.user.username}</h3>
             <div>{story.user.image ?
-            <img className="profile-image"alt="oh no!"src={story.user.image}/>
+            <img className="profile-image" alt="oh no!"src={story.user.image}/>
             : <img className="profile-image" alt="oh no!" 
             src="https://i.ibb.co/z5Xj6hH/profile-pic.png" />
             }</div>
+            </div>
             </Link>
             <h2 className="user-font"><u>"{story.title}"</u></h2>
             { story.image ?

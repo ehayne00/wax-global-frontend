@@ -168,8 +168,8 @@ class UserDetails extends Component {
     return (
         
         <div className="prof-box2">
-            <h1 className="explanation-font">{user.username}</h1>
-            <div>{user.image ?
+            <h1 className="explanation-font"><u>{user.username}</u></h1>
+            <div className="name-pic-div">{user.image ?
             <img className="profile-image" alt="oh no!" src={user.image} />
             : <img className="profile-image" alt="oh no!" 
              src="https://i.ibb.co/z5Xj6hH/profile-pic.png" /> }

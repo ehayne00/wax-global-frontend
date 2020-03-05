@@ -12,7 +12,7 @@ body {
   background-color: rgba(255, 255, 230, 0.94);
   padding: 30px;
   border-radius: 5px;
-  left: 15vw;
+  left: 20vw;
   z-index: 100;
 }
 
@@ -120,13 +120,13 @@ body {
 .root-explanation {
   position: fixed;
   top: 27%;
-  left: 30%;
+  left: 32vw;
 }
 
 .secondline {
   position: fixed;
-  top: 29%;
-  left: 33%;
+  top: 30%;
+  left: 34vw;
 }
 
 .wave {
@@ -140,8 +140,8 @@ body {
   font-size: 400%;
   font-family: 'Trade Winds';
   position: absolute;
-  left: 28%;
-  top: 23px;
+  left: 30vw;
+  top: 20px;
 
 }
 
@@ -202,41 +202,44 @@ mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 
 }
 
+.name-pic-div {
+  position: absolute;
+  left: 8vw;
+  top: 35px;
+}
+
 .profile-image {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  position: absolute;
   border: 1px solid #ddd;
   border-radius: 100px;
   padding: 2px;
-  left: 190px;
-  top: 30px;
+
 }
 
 .name-position {
   position: absolute;
-  left: 125px;
-  top: 40px;
+  left: 8vw;
+  top: 100px;
 }
 
 .loggedinimage {
   width: 150px;
   height: 150px;
   object-fit: cover;
-  position: absolute;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 5px;
-  left: 145%;
+
+}
+
+.image-name-navbar {
+  position: absolute;
+  left: 38vw;
   top: -350%;
 }
 
-.loggedinusername {
-  position: absolute;
-  left: 160%;
-  top: 30px;
-}
 
 .picture-uploaded {
   max-width: 800px;
