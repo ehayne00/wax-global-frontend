@@ -12,7 +12,8 @@ class StoryDetails extends React.Component {
         myFaveStories: [],
         editStoryFormShowing: false,
         addToFavouritesButtonShowing: true,
-        removeFromFavouritesButtonShowing: false
+        removeFromFavouritesButtonShowing: false,
+        currentUser: {}
     }
 
     updateState = fave => {
@@ -36,8 +37,16 @@ class StoryDetails extends React.Component {
     }
 
     componentDidMount() {
+        
+        this.validateUser()
+        
+    }
+
+    componentDidUpdate(prevProps, prevState) {
         const {story} = this.props.location.state
-        API.fetchUserFavourites()
+
+        if(prevState.currentUser !== this.state.currentUser) {
+            API.fetchUserFavourites()
         .then(data => 
             (this.setState({
           myFaveStories: data.map(fave => fave[0].id),
@@ -45,6 +54,7 @@ class StoryDetails extends React.Component {
         }),
         this.buttonShowing(story))
         )
+        }
     }
 
     buttonShowing = (story) => {
@@ -66,11 +76,22 @@ class StoryDetails extends React.Component {
         alert('Favourite deleted!')
     }
 
-   
+validateUser = () => {
+        fetch("http://localhost:3000/validate", {
+         headers: {
+         Authorization: localStorage.token
+        }
+        }).then(resp => resp.json()).then(data => (
+       this.setState({
+        currentUser: data.user})
+       ))
+}
 
 render() {
    const {story} = this.props.location.state
 
+    // this.state.currentUser === null && this.validateUser()
+    // debugger
     return (
         <div className="prof-box4">
 
@@ -101,9 +122,10 @@ render() {
             <Button className="button-four"variant='contained'color='secondary' onClick={() => this.props.addToFavourites(story.id, this.toggleFavouriteAndRemoveButtons, this.updateState)}>Add To Favourites</Button>
             )}
             {this.state.removeFromFavouritesButtonShowing &&(
-            <Button className="button-four"variant='contained' color='secondary' onClick={() => this.deleteFave(this.state.myFavouriteInstances, story, this.props.user)}>Remove From Favourites</Button>
+            <Button className="button-four"variant='contained' color='secondary' onClick={() => this.deleteFave(this.state.myFavouriteInstances, story, this.state.currentUser)}>Remove From Favourites</Button>
             )}
-            {this.props.user.id === story.user.id && (
+            
+            {this.state.currentUser.id === story.user.id && (
                 <div>
                 <Button className="button-five" variant='contained' color='secondary'onClick={() => this.props.deleteStory(story.id)}>Delete Story</Button>
                 <Button className="button-six" variant='contained' color='secondary'onClick={() => this.toggleEditStoryForm()}>Edit Story</Button>
