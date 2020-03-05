@@ -22,8 +22,8 @@ class App extends React.Component {
     user_id: null,
     latitude: "",
     longitude: "",
-    searchTerm: ""
-    
+    searchTerm: "",
+    index: 0
   }
 
   updateStoriesPatched = (story, updatedStory) => {
@@ -141,11 +141,24 @@ class App extends React.Component {
     localStorage.removeItem('token')
   }
 
+  renderMore = () => {
+    const filteredStories = this.filterStories()
+    
+      this.state.index >= filteredStories.length - 21
+      ? this.setState({
+          index: 0
+      })
+      : this.setState({
+          index: this.state.index + 21
+      })
+  }
+
   render () {
-    const { stories, mapShowing, user, latitude, longitude,  } = this.state
-    const { toggleMapShowing, logout, login, addToFavourites, updateSearchTerm, 
+    const { stories, mapShowing, user, latitude, longitude, index } = this.state
+    const { toggleMapShowing, logout, login, addToFavourites, updateSearchTerm, renderMore, 
       updateStories, deleteStory, deleteUser, updateStoriesPatched, updateUserPatched } = this
     const filteredStories = this.filterStories()
+    const render21 = filteredStories.slice(index, index + 21)
   return (
     <div className="App">
       
@@ -159,7 +172,7 @@ class App extends React.Component {
         <Route exact path='/' component={props => (
           <LoginPage {...props} login={login} />)} />
         <Route exact path='/stories' render={ props => (
-          <StoriesList {...props} stories={filteredStories} mapShowing={mapShowing} 
+          <StoriesList {...props} stories={render21} mapShowing={mapShowing} 
           toggleMapShowing={toggleMapShowing} latitude={latitude} 
           longitude={longitude} updateSearchTerm={updateSearchTerm}/>
         )} />

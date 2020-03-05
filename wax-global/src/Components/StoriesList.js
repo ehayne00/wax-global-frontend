@@ -3,7 +3,7 @@ import StoryCard from './StoryCard'
 import MapView from './MapView'
 
 const StoriesList = ({ stories, mapShowing, toggleMapShowing, updateSelectedStory, 
-    updateSelectedUserToTargetUser, latitude, longitude, updateSearchTerm }) => {
+    updateSelectedUserToTargetUser, latitude, longitude, updateSearchTerm, renderMore }) => {
     return (
         <div>
             <div className="filter-input explanation-font"> I want to checkout surf spots in: 
@@ -19,7 +19,7 @@ const StoriesList = ({ stories, mapShowing, toggleMapShowing, updateSelectedStor
                 updateSelectedUserToTargetUser={updateSelectedUserToTargetUser}/>
             ))}
             </div>
-            
+            <button className='morebutton' onClick={renderMore} ><span>See More..</span></button>
         </div>
     )
 }
