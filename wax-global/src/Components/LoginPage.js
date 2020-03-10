@@ -70,9 +70,9 @@ class LoginPage extends React.Component {
         return (
             <div className="root-explanation">
               <div >
-              <h4 className="explanation-font">Find where the best surf breaks and destinations are across the globe 
+              <h4 className="explanation-font">Find where the best surf breaks and destinations are across the globe and share awesome images, videos and recommendations.
                  </h4>
-                 <h4 className="secondline explanation-font">and share awesome images, videos and recommendations.</h4>
+                 
                  <h3 className="forsurfers">For surfers, by surfers ...</h3>
                  </div>
                 {this.state.loginForm ?

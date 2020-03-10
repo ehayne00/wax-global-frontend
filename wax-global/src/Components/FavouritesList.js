@@ -50,7 +50,7 @@ class FavouritesList extends React.Component {
             </div>
             <h3 className="explanation-font">Your Favourites:</h3>
             {this.props.mapShowing && (
-            <div><MapView latitude={this.props.latitude} longitude={this.props.longitude}
+            <div className="map-view2"><MapView latitude={this.props.latitude} longitude={this.props.longitude}
             toggleMapShowing={this.props.toggleMapShowing}/></div>)}
           { this.state.myFavouriteStories.length > 0 ?
           <div className="prof-box3">{

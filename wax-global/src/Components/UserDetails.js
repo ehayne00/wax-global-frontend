@@ -181,7 +181,7 @@ class UserDetails extends Component {
     // debugger
     return (
       <div className="prof-box2">
-        <h1 className="explanation-font">
+        <h1 className="explanation-font font-size2">
           <u>{user.username}</u>
         </h1>
         <div className="name-pic-div">
@@ -195,9 +195,9 @@ class UserDetails extends Component {
             />
           )}
         </div>
-        <p className="user-font">"{user.bio}"</p>
+        <p className="user-font font-size2">"{user.bio}"</p>
         {this.props.mapShowing && (
-          <div>
+          <div className="map-view2">
             <MapView
               latitude={this.props.latitude}
               longitude={this.props.longitude}
@@ -206,8 +206,9 @@ class UserDetails extends Component {
           </div>
         )}
         {this.state.currentUser.id === user.id && (
-          <div>
+          <div className="buttons-width">
             <Button
+              className="button-extra"
               variant="contained"
               color="secondary"
               onClick={() => this.props.deleteUser()}
@@ -359,7 +360,7 @@ class UserDetails extends Component {
           </div>
         )}
         {this.state.userStories.length > 0 ? (
-          <div className="prof-box3">
+          <div className="prof-box5">
             {this.state.userStories.map(story => (
               <ProfileCard
                 story={story}

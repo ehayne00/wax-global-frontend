@@ -231,6 +231,7 @@ class App extends React.Component {
                   latitude={latitude}
                   longitude={longitude}
                   updateSearchTerm={updateSearchTerm}
+                  renderMore={renderMore}
                 />
               )}
             />

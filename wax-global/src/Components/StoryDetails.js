@@ -106,7 +106,7 @@ render() {
             }</div>
             </div>
             </Link>
-            <h2 className="user-font"><u>"{story.title}"</u></h2>
+            <h2 className="user-font text-width"><u>"{story.title}"</u></h2>
             { story.image ?
             <img className="picture-uploaded"alt="oh no!" src={story.image}/>
             : <video className="picture-uploaded" controls autoPlay loop muted>
@@ -126,7 +126,7 @@ render() {
             )}
             
             {this.state.currentUser.id === story.user.id && (
-                <div>
+                <div className="buttons-width">
                 <Button className="button-five" variant='contained' color='secondary'onClick={() => this.props.deleteStory(story.id)}>Delete Story</Button>
                 <Button className="button-six" variant='contained' color='secondary'onClick={() => this.toggleEditStoryForm()}>Edit Story</Button>
                 </div>

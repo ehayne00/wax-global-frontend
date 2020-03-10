@@ -10,7 +10,7 @@ const ProfileCard = ({story, user, toggleMapShowing}) => {
 
     return (
       
-        <div className="card"> 
+        <div className="card2"> 
         <div className="address-background">
         <h4 className="h4-position"><span role="img">📌</span> {story.address}</h4>
         </div>

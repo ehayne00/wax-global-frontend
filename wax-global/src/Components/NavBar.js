@@ -13,7 +13,7 @@ const NavBar = ({ logout, user }) => {
             <div className="navbuttons">
             <NavLink to={{pathname: `/users/${user.id}`,
             state: {user: user}}} exact ><div className="image-name-navbar">{user.image ? <img className="loggedinimage" src={user.image}/>
-            : <img className="loggedinimage" src="https://i.ibb.co/z5Xj6hH/profile-pic.png"/>}<h3 className="explanation-font">{`user: ${user.username}`}</h3></div></NavLink>
+            : <img className="loggedinimage" src="https://i.ibb.co/z5Xj6hH/profile-pic.png"/>}<h3 className="explanation-font font-size">{`user: ${user.username}`}</h3></div></NavLink>
             
             <Button className="button-one" variant='contained' color='secondary'><NavLink to='/stories' exact >Swell Stories</NavLink></Button>
             <Button className="button-two" variant='contained' color='secondary'><NavLink to='/favourites' exact >My Faves</NavLink></Button>
