@@ -1,6 +1,5 @@
 import React from 'react'
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import { Button } from '@material-ui/core'
 
 
 const MapView = ({google, onMapClicked, onMarkerClick, onInfoWindowClose, latitude, longitude, toggleMapShowing}) => {

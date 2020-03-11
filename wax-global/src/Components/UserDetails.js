@@ -8,7 +8,6 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import EditUserForm from "./EditUserForm";
 import { Button } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
 const storyUrl = "http://localhost:3000/stories";
 // const API_KEY = 'AIzaSyAgUGzj-VxQPQ1P0uaVNt6r62c9B1rP6Go'
 
@@ -62,7 +61,7 @@ class UserDetails extends Component {
   setAddress = e => {
     e = e.replace(/,/g, " -");
     let place = e.split(" - ");
-    //    let place =  e.split(/[,\-]/g)
+   
 
     const country = place[place.length - 1];
     const town = place[0];
